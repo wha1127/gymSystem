@@ -117,6 +117,7 @@ export default {
     .box-card
       margin 30px 80px
       box-sizing border-box 
+      height 258px
       .title
         position relative
         margin-left 10px
@@ -135,5 +136,5 @@ export default {
           justify-content center
           align-items center
           flex-direction column
-          margin 43px 0 65px 74px
+          margin 23px 0 65px 74px
 </style>

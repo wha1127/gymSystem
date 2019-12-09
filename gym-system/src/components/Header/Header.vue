@@ -9,15 +9,25 @@
     <div class="header-right">
         <img src="./images/message.png" alt="消息提示" class="message">
         <img src="./images/avatar.png" alt="头像" class="avatar">
-        <span>用户名</span>
+        <span>用户{{user.name}}</span>
     </div>
   </div>
 
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
-
+  name:'Header',
+  computed: {
+    ...mapState({
+      user: state => state.user.user
+    }),
+  },
+  mounted() {
+    this.$store.dispatch('autoLogin')
+    console.log(this.$store.state)
+  },
 }
 </script>
 

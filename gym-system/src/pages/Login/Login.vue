@@ -32,6 +32,9 @@ export default {
       checked:false
     }
   },
+  mounted() {
+    console.log(this)
+  },
   methods: {
     changeCaptcha(){
       this.$refs.im.src = `http://localhost:5000/captcha?time=${Date.now()}`
@@ -39,12 +42,12 @@ export default {
     async login(){
       const {pwd,name,captcha} = this
       const result = await reqLogin({pwd,name,captcha})
-      console.log(result)
       if(result.data.code === 0){
          this.$message({
           message: '登录成功',
           type: 'success'
         });
+        this.$store.dispatch('saveUser',result.data.data)
         this.$router.replace('/home')
       }
       this.changeCaptcha()
@@ -59,6 +62,8 @@ export default {
     justify-content center
     align-items  center
     height 100%
+    width 100%
+    background-color rgba(240,242,245,1)
     .loginLeft
       box-sizing border-box
       height 500px

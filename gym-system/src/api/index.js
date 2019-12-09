@@ -10,3 +10,11 @@ export const reqLogin = ({name,pwd,captcha}) => ajax({
     captcha
   }
 })
+
+export const reqAutoLogin = () => ajax({
+  method:'GET',
+  url:BASE+`/auto_login`,
+  headers:{
+    needToken:true
+  }
+})
