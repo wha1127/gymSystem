@@ -18,3 +18,15 @@ export const reqAutoLogin = () => ajax({
     needToken:true
   }
 })
+
+export const reqRole = ({name,phone,pwd,status,menus}) => ajax({
+  method:'POST',
+  url:BASE+'/role/update',
+  data:{
+    name,
+    phone,
+    pwd,
+    status,
+    menus
+  }
+})

@@ -1,5 +1,6 @@
 import Login from '../pages/Login/Login.vue'
 import Home from '../pages/Home/Home.vue'
+import Worker from '../pages/Worker/Worker.vue'
 export default [
   {
     path:"/login",
@@ -8,6 +9,10 @@ export default [
   {
     path:"/home",
     component:Home
+  },
+  {
+    path:"/worker",
+    component:Worker
   },
   {
     path:"/",
