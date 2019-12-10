@@ -18,7 +18,7 @@ router.beforeEach((to,from,next) => {
     if(!store.state.user.token){
       router.push('/login')
     }
-  }
+  } 
   next()
 })
 

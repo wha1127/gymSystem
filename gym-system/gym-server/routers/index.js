@@ -166,6 +166,18 @@ router.post('/coaches/add',async (req,res)=>{
  }
 });
 
+router.post('/coaches/update',async (req,res)=>{
+  const {name} = req.body;
+  Coaches.findOneAndUpdate({name})
+    .then(oldName => {
+      res.json({status:0,data:{...req.body}})
+    })
+    .catch(error => {
+      res.json({status:1,message:'更新教练信息失败'})
+    })
+ });
+
+
 router.post('/coaches/delete',(req,res)=>{
   const {name} = req.body;
   users.deleteOne({name})
