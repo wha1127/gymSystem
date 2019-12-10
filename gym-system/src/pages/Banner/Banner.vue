@@ -19,7 +19,7 @@
       <div class="bannerContainer">
         <div class="banner-header">
           <p class="header-left">banner图列表</p>
-          <el-button class="header-right" type="primary">新增banner图</el-button>
+          <el-button class="header-right" type="primary" @click='addBanner'>新增banner图</el-button>
         </div>
         <div class="bannerList">
           <el-table :data="tableData" style="width: 100%">
@@ -101,6 +101,10 @@ export default {
     },
     goNewPage(url) {
       window.open(url)
+    },
+    addBanner() {
+      this.$router.push('/banner/add')
+      this.isShowDetail()
     }
   }
 }

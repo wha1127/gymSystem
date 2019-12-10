@@ -3,19 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-<<<<<<< HEAD
     "serve": "vue-cli-service serve",
-=======
     "serve": "vue-cli-service serve --open",
->>>>>>> 教练列表,预约管理,banner图静态页面搭建完毕
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^3.4.3",
-<<<<<<< HEAD
-    "vue": "^2.6.10"
-=======
+    "vue": "^2.6.10",
     "element-ui": "^2.13.0",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
@@ -23,17 +18,13 @@
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
     "vuex": "^3.1.2"
->>>>>>> 教练列表,预约管理,banner图静态页面搭建完毕
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "babel-eslint": "^10.0.3",
-<<<<<<< HEAD
-=======
     "babel-plugin-component": "^1.1.1",
->>>>>>> 教练列表,预约管理,banner图静态页面搭建完毕
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "vue-template-compiler": "^2.6.10"
@@ -47,9 +38,7 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-<<<<<<< HEAD
     "rules": {},
-=======
     "rules": {
       "vue/no-side-effects-in-computed-properties": "off",
       "no-console": "off",
@@ -79,7 +68,6 @@
       "no-irregular-whitespace ": "off",
       "vue/no-unused-vars ": "off"
     },
->>>>>>> 教练列表,预约管理,banner图静态页面搭建完毕
     "parserOptions": {
       "parser": "babel-eslint"
     }

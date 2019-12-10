@@ -1,84 +1,84 @@
 <template>
-<div>
-  <div class="coach-outer" v-if="isShow">
-    <div class="main-header">
-      <el-card class="box-card">
-        <el-row :gutter="20">
-          <el-col :offset="2" :span="1">
-            <el-button size="mini" @click="$router.push('/order')">返回</el-button>
-          </el-col>
-          <el-col :span="10" :offset="1">
-            <el-breadcrumb separator="/" id="boxBodyBooton">
-              <el-breadcrumb-item :to="{path:'/'}">功能面板</el-breadcrumb-item>
-              <el-breadcrumb-item>教练列表</el-breadcrumb-item>
-            </el-breadcrumb>
-          </el-col>
-        </el-row>
-      </el-card>
-    </div>
-    <div class="coachContainer">
-      <div class="coach-header">
-        <p class="header-left">教练列表</p>
-        <el-button class="header-right" type="primary">新增教练</el-button>
+  <div>
+    <div class="coach-outer" v-if="isShow">
+      <div class="main-header">
+        <el-card class="box-card">
+          <el-row :gutter="20">
+            <el-col :offset="2" :span="1">
+              <el-button size="mini" @click="$router.push('/order')">返回</el-button>
+            </el-col>
+            <el-col :span="10" :offset="1">
+              <el-breadcrumb separator="/" id="boxBodyBooton">
+                <el-breadcrumb-item :to="{path:'/'}">功能面板</el-breadcrumb-item>
+                <el-breadcrumb-item>教练列表</el-breadcrumb-item>
+              </el-breadcrumb>
+            </el-col>
+          </el-row>
+        </el-card>
       </div>
-      <div class="coach-search">
-        <div class="coachName">
-          <p>教练名字:</p>
-          <el-input v-model="name" placeholder="请输入教练名字"></el-input>
+      <div class="coachContainer">
+        <div class="coach-header">
+          <p class="header-left">教练列表</p>
+            <el-button class="header-right" type="primary" @click='goDetail'>新增教练</el-button>
         </div>
-        <div class="coachGender">
-          <span>性别:</span>
-          <el-select v-model="value" placeholder="全部">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            ></el-option>
-          </el-select>
+        <div class="coach-search">
+          <div class="coachName">
+            <p>教练名字:</p>
+            <el-input v-model="name" placeholder="请输入教练名字"></el-input>
+          </div>
+          <div class="coachGender">
+            <span>性别:</span>
+            <el-select v-model="value" placeholder="全部">
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
+          </div>
+          <el-button type="primary" plain>搜索</el-button>
         </div>
-        <el-button type="primary" plain>搜索</el-button>
-      </div>
-      <div class="coachList">
-        <el-table :data="tableData" style="width: 100%">
-          <el-table-column prop="coachId" label="教练id" width="140"></el-table-column>
-          <el-table-column prop="coachAvatar" label="头像" width="140">
-            <img class="coachAvatar" src="../../utils/images/avatar/01.jpg" alt />
-          </el-table-column>
-          <el-table-column prop="coachName" label="姓名" width="140"></el-table-column>
-          <el-table-column prop="coachGrade" label="教练等级" width="140"></el-table-column>
-          <el-table-column prop="personalMember" label="私教课会员" width="140"></el-table-column>
-          <el-table-column prop="sort" label="排序" width="140"></el-table-column>
-          <el-table-column prop="gender" label="性别" width="140"></el-table-column>
-          <el-table-column prop="star" label="星级" width="140"></el-table-column>
-          <el-table-column prop="options" label="操作">
-            <el-button type="text" size="small" @click="goDetail">编辑</el-button>
-            <span class="shu">|</span>
-            <el-button type="text" size="small">删除</el-button>
-          </el-table-column>
-        </el-table>
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :pager-count="5"
-          :page-sizes="[10, 20, 30, 40]"
-          :page-size="10"
-          layout="total, sizes, prev, pager, next"
-          :total="160"
-          style="{height:'300px'}"
-        ></el-pagination>
+        <div class="coachList">
+          <el-table :data="tableData" style="width: 100%">
+            <el-table-column prop="coachId" label="教练id" width="140"></el-table-column>
+            <el-table-column prop="coachAvatar" label="头像" width="140">
+              <img class="coachAvatar" src="../../utils/images/avatar/01.jpg" alt />
+            </el-table-column>
+            <el-table-column prop="coachName" label="姓名" width="140"></el-table-column>
+            <el-table-column prop="coachGrade" label="教练等级" width="140"></el-table-column>
+            <el-table-column prop="personalMember" label="私教课会员" width="140"></el-table-column>
+            <el-table-column prop="sort" label="排序" width="140"></el-table-column>
+            <el-table-column prop="gender" label="性别" width="140"></el-table-column>
+            <el-table-column prop="star" label="星级" width="140"></el-table-column>
+            <el-table-column prop="options" label="操作">
+              <el-button type="text" size="small" @click="goDetail">编辑</el-button>
+              <span class="shu">|</span>
+              <el-button type="text" size="small">删除</el-button>
+            </el-table-column>
+          </el-table>
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :pager-count="5"
+            :page-sizes="[10, 20, 30, 40]"
+            :page-size="10"
+            layout="total, sizes, prev, pager, next"
+            :total="160"
+            style="{height:'300px'}"
+          ></el-pagination>
+        </div>
       </div>
     </div>
+    <router-view v-if="!isShow" :isShowDetail="isShowDetail"></router-view>
   </div>
-  <router-view v-if="!isShow" :isShowDetail="isShowDetail"></router-view>
-</div>
 </template>
 <script>
 export default {
   name: 'Coach',
   data() {
     return {
-      isShow:true,
+      isShow: true,
       name: '',
       value: '',
       options: [
@@ -139,9 +139,12 @@ export default {
       this.isShowDetail()
       this.$router.push('/coach/detail')
     },
-    isShowDetail(){
+    isShowDetail() {
       this.isShow = !this.isShow
     }
+  },
+  mounted() {
+    this.isShow = true
   }
 }
 </script>
@@ -221,21 +224,21 @@ export default {
               color #000
               background-color #cff
       .el-pagination
-          height 50px
-          line-height 50px
-          padding 20px
+        height 50px
+        line-height 50px
+        padding 20px
+        display flex
+        align-items center
+        justify-content flex-end
+        button
+          border 1px solid #ccc
+          margin-right 5px
+          border-radius 4px
+        .el-pager
           display flex
           align-items center
-          justify-content flex-end
-          button
+          li
             border 1px solid #ccc
             margin-right 5px
             border-radius 4px
-          .el-pager
-            display flex
-            align-items center
-            li
-              border 1px solid #ccc
-              margin-right 5px
-              border-radius 4px
 </style>

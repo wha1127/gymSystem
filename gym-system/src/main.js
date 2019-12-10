@@ -1,13 +1,5 @@
 import Vue from 'vue'
 import App from './App.vue'
-<<<<<<< HEAD
-
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App),
-}).$mount('#app')
-=======
 //引入element-ui
 import ElementUI  from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -16,9 +8,13 @@ import 'element-ui/lib/theme-chalk/index.css'
 import router from './router/index.js'
 //引入store
 import store from './store/index.js'
+Vue.config.productionTip = false
+// new Vue({
+//   render: h => h(App),
+// }).$mount('#app')
+
 
 Vue.use(ElementUI)
-Vue.config.productionTip = false
 
 //在脚手架3中使用脚手架2的配置,需要在vue.config.js中配置esm.js这个文件
 //跨域需要在vue.config.js中配置devServer中的proxy代理
@@ -34,4 +30,4 @@ new Vue({
 // new Vue({
 //   render: h => h(App),
 // }).$mount('#app')
->>>>>>> 教练列表,预约管理,banner图静态页面搭建完毕
+

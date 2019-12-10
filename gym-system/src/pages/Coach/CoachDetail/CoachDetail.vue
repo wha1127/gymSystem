@@ -58,17 +58,19 @@
                 <el-input v-model="ruleForm.ranking" placeholder="数字越大排位越靠前,数字越小排序越靠后"></el-input>
               </el-form-item>
               <el-form-item label="上传图片:">
-                <ul>
-                  <li>
-                    <i class="el-icon-circle-plus"></i>
-                    <span>添加教练头像</span>
-                    <span>(第一张图为默认头像)</span>
-                  </li>
-                  <li  @mouseenter="showDel=true" @mouseleave="showDel=false">
-                    <img src="../../../utils/images/photos/03.jpg" alt='教练头像' />
-                    <a class="delImg" v-show='showDel'>删除</a>
-                  </li>
-                </ul>
+                <el-upload
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  list-type="picture-card"
+                  :on-preview="handlePictureCardPreview"
+                  :on-remove="handleRemove"
+                >
+                  <i class="el-icon-circle-plus" style="color: #06f"></i>
+                  <span>添加图片</span>
+                  <span>图片大小最多3M</span>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                  <img width="100%" :src="dialogImageUrl" alt />
+                </el-dialog>
               </el-form-item>
             </el-form>
           </div>
@@ -93,7 +95,7 @@
 <script>
 export default {
   name: 'CoachDetail',
-  props:['isShowDetail'],
+  props: ['isShowDetail'],
   data() {
     return {
       showDel: false,
@@ -126,7 +128,7 @@ export default {
     onSubmit() {
       console.log('submit!')
     },
-    gabackCoach(){
+    gabackCoach() {
       this.$router.back()
       this.isShowDetail()
     }
@@ -186,46 +188,13 @@ export default {
                     width 300px
               &:nth-child(6)
                 .el-form-item__content
-                  ul
+                  width 200px
+                  height 122px
+                  .el-upload
                     display flex
-                    li 
-                      box-sizing border-box
-                      width 200px
-                      height 122px
-                      display flex
-                      flex-direction column
-                      justify-content center
-                      align-items center
-                      margin-right 40px
-                      position relative
-                      &:nth-child(1)
-                        width 200px
-                        background-color #eee
-                        border 1px dashed #ccc
-                        border-radius 3px
-                      i
-                        padding-top 15px
-                        padding-bottom 5px
-                        font-size 30px
-                        color #08f
-                      span
-                        height 24px
-                        line-height 24px
-                      img
-                        width 200px
-                        height 122px
-                        vertical-align middle
-                        border-radius 3px
-                      .delImg
-                        position absolute
-                        bottom 0
-                        width 100%
-                        height 30px
-                        line-height 30px
-                        color #fff
-                        background-color rgba(0,0,0,0.3)
-                        text-align center
-                        cursor pointer
+                    flex-direction column
+                    line-height 2
+                    justify-content center
     .detail-introduce
       background-color #fff
       margin-top 20px
