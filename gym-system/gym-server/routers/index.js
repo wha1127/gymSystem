@@ -165,6 +165,7 @@ router.post('/coaches/delete',(req,res)=>{
 });
 
 router.get('/order/get',(req,res) => {
+  const orders = require('../data/orders.json')
   Orders.find({})
     .then(orders => {
       res.json({status:0,data:orders})
