@@ -5,9 +5,10 @@ import ElementUI from 'element-ui';
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css';
 import Header from './components/Header/Header.vue'
-
+import Split from './components/Split/Split.vue'
 Vue.use(ElementUI)
 Vue.component(Header.name,Header)
+Vue.component(Split.name,Split)
 Vue.config.productionTip = false
 
 new Vue({

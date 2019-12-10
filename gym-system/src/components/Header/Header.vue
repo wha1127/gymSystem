@@ -26,7 +26,6 @@ export default {
   },
   mounted() {
     this.$store.dispatch('autoLogin')
-    console.log(this.$store.state)
   },
 }
 </script>

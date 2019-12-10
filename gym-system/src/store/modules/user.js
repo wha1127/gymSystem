@@ -27,7 +27,6 @@ const actions = {
       const result = await reqAutoLogin()
       if(result.data.code === 0){
         const user = result.data.data
-        console.log(user)
         commit(RECEIVE_USER, user)
       }
     }

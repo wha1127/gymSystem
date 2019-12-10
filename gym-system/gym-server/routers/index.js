@@ -12,6 +12,10 @@ const createToken = require('../token/createToken')
 const checkToken = require('../token/checkToken')
 const Roles = require('../models/Roles');
 const Coaches = require('../models/Coaches')
+const Orders = require('../models/Orders')
+const Students = require('../models/Students')
+const Courses = require('../models/Courses')
+
 
 router.get('/captcha', function (req, res) {
   var captcha = svgCaptcha.create({
@@ -110,27 +114,18 @@ router.get('/auto_login', function (req, res) {
    })
 })
 
-router.post('/role/update', (req, res) => {
+router.post('/role/update', async (req, res) => {
   const role = req.body;
-  role.authTime = Date.now();
-
-  Roles.findOneAndUpdate({_id: role.roleId}, role)
-    .then(oldRole => {
-
-      const newRole = {
-        "menus": role.menus,
-        "_id": role.roleId,
-        "name": oldRole.name,
-        "phone":role.phone,
-        "pwd":role.pwd,
-        "status":role.status
-      };
-      console.log(res.json)
-      res.json({status: 0, data: newRole});
-    })
-    .catch(error => {
-      res.json({status: 1, msg: '更新角色权限失败'});
-    })
+  console.log(role)
+  let roles
+  try {
+     roles = await Roles.create({...req.body})
+    console.log(roles)
+    res.json({status:0,msg:'更新角色成功'})
+  } catch (error) {
+    console.log(error)
+    res.json({status: 1, msg: '更新角色权限失败'});
+  }
 });
 
 router.get('/coaches/get',(req,res)=>{
@@ -141,7 +136,7 @@ router.get('/coaches/get',(req,res)=>{
     .catch(error => {
       res.json({status:1 ,msg: '获取教练列表失败'})
     })
-})
+});
 
 router.post('/coaches/add',(req,res)=>{
  const {name,avatar,rank,memberCount,sort,sex,star,id} = req.body;
@@ -156,7 +151,7 @@ router.post('/coaches/add',(req,res)=>{
  }catch(error){
    res.json({status:1,msg:'添加失败'})
  }
-})
+});
 
 router.post('/coaches/delete',(req,res)=>{
   const {name} = req.body;
@@ -167,5 +162,69 @@ router.post('/coaches/delete',(req,res)=>{
     .catch(()=>{
       res.json({status:1,msg:'删除失败'})
     })
+});
+
+router.get('/order/get',(req,res) => {
+  Orders.find({})
+    .then(orders => {
+      res.json({status:0,data:orders})
+    })
+    .catch(error => {
+      res.json({status:1,msg:'获取订单列表失败'})
+    })
 })
+
+router.get('/student/get',(req,res) => {
+  const data = require('../data/students.json')
+  Students.find({})
+    .then(students => {
+      res.json({status:0,data})
+    })
+    .catch(error => {
+      res.json({status:1,msg:'获取订单列表失败'})
+    })
+})
+
+router.get('/course/get',(req,res) => {
+  Courses.find({})
+    .then(courses => {
+       res.json({status:0,data:courses})
+    })
+    .catch(error => {
+      res.json({status:1,msg:'获取课程列表失败'})
+    })
+})
+
+router.post('/course/add',(req,res) => {
+  Courses.create({...req.body})
+    .then(course => {
+      res.json({status:0,data:course})
+    })
+    .catch(error => {
+      res.json({status:1,msg:"添加课程失败"})
+    })
+})
+
+router.post('/course/delete',(req,res) => {
+  const {title} = req.body
+  Courses.deleteOne({title})
+  .then(() => {
+    res.json({status:0,data:title})
+  })
+  .catch(error => {
+    res.json({status:1,msg:'删除课程失败'})
+  })
+})
+
+router.post('/course/update',(req,res) => {
+  const {title} = req.body
+  Courses.findByIdAndUpdate({title})
+  .then(oldCourse => {
+    res.json({status:0,data:{title}})
+  })
+  .catch(error => {
+    res.json({status:1,msg:'更新课程失败'})
+  })
+})
+
 module.exports = router;

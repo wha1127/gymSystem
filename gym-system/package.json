@@ -61,7 +61,8 @@
       "camelcase ": "off",
       "no-console": "off",
       "vue/return-in-computed-property": "off",
-      "vue/no-side-effects-in-computed-properties": "off"
+      "vue/no-side-effects-in-computed-properties": "off",
+      "vue/no-unused-vars":"off"
     },
     "parserOptions": {
       "parser": "babel-eslint"
