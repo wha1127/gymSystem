@@ -1,145 +1,148 @@
 <template>
   <div>
-    <el-card class="box-card">
-      <el-row :gutter="20">
+    <div>
+      <el-card class="box-card">
+        <el-row :gutter="20">
+          <el-col :offset="2"
+                  :span="1">
+            <el-button size='mini'
+                       @click="goPage">返回</el-button>
+          </el-col>
+          <el-col :span="10"
+                  :offset="1">
+            <el-breadcrumb separator="/"
+                           id="boxBodyBooton">
+              <el-breadcrumb-item :to="{ path: '/' }">功能面板</el-breadcrumb-item>
+              <el-breadcrumb-item>商品管理</el-breadcrumb-item>
+            </el-breadcrumb>
+          </el-col>
+        </el-row>
+      </el-card>
+      <div class="body">
+        <div class="shop">商品管理</div>
+        <el-button size='mini'
+                   type="primary"
+                   class="bodyBottn"
+                   @click="centerDialogVisible = !centerDialogVisible">添加商品</el-button>
+      </div>
+      <div class="bodyBot">
+        <div class="bodyBotTop">
+          <span>商品名称：</span>
+          <el-input placeholder="请输入商品名称"
+                    v-model="input"></el-input>
+        </div>
         <el-col :offset="2"
                 :span="1">
           <el-button size='mini'
-                     @click="goPage">返回</el-button>
+                     @click="goShop">搜索</el-button>
         </el-col>
-        <el-col :span="10"
-                :offset="1">
-          <el-breadcrumb separator="/"
-                         id="boxBodyBooton">
-            <el-breadcrumb-item :to="{ path: '/' }">功能面板</el-breadcrumb-item>
-            <el-breadcrumb-item>商品管理</el-breadcrumb-item>
-          </el-breadcrumb>
-        </el-col>
-      </el-row>
-    </el-card>
-    <div class="body">
-      <div class="shop">商品管理</div>
-      <el-button size='mini'
-                 type="primary"
-                 class="bodyBottn"
-                 @click="centerDialogVisible = !centerDialogVisible">添加商品</el-button>
-    </div>
-    <div class="bodyBot">
-      <div class="bodyBotTop">
-        <span>商品名称：</span>
-        <el-input placeholder="请输入商品名称"
-                  v-model="input"></el-input>
       </div>
-      <el-col :offset="2"
-              :span="1">
-        <el-button size='mini'
-                   @click="goShop">搜索</el-button>
-      </el-col>
-    </div>
-    <div class="bodyBottom">
-      <el-table :data="tableData"
-                style="width: 100%">
-        <el-table-column prop="id"
-                         label="商品id"
-                         width="130">
-        </el-table-column>
-        <el-table-column prop="name"
-                         label="名称"
-                         width="130">
-        </el-table-column>
-        <el-table-column prop="type"
-                         label="类型"
-                         width="130">
-        </el-table-column>
-        <el-table-column prop="money"
-                         label="金额"
-                         width="130">
-        </el-table-column>
-        <el-table-column prop="integral"
-                         label="积分"
-                         width="130">
-        </el-table-column>
-        <el-table-column prop="sort"
-                         label="排序"
-                         width="130">
-        </el-table-column>
-        <el-table-column prop="sold"
-                         label="已售"
-                         width="130">
-        </el-table-column>
-        <el-table-column label="操作"
-                         width="240">
-          <template slot-scope="scope">
-            <el-breadcrumb separator="|">
-              <el-breadcrumb-item>
-                <el-button type="text">编辑</el-button>
-              </el-breadcrumb-item>
-              <el-breadcrumb-item>
-                <el-button @click.native.prevent="deleteRow(scope.$index, tableData)"
-                           type="text">
-                  删除
-                </el-button>
+      <div class="bodyBottom">
+        <el-table :data="tableData"
+                  style="width: 100%">
+          <el-table-column prop="id"
+                           label="商品id"
+                           width="130">
+          </el-table-column>
+          <el-table-column prop="name"
+                           label="名称"
+                           width="130">
+          </el-table-column>
+          <el-table-column prop="type"
+                           label="类型"
+                           width="130">
+          </el-table-column>
+          <el-table-column prop="money"
+                           label="金额"
+                           width="130">
+          </el-table-column>
+          <el-table-column prop="integral"
+                           label="积分"
+                           width="130">
+          </el-table-column>
+          <el-table-column prop="sort"
+                           label="排序"
+                           width="130">
+          </el-table-column>
+          <el-table-column prop="sold"
+                           label="已售"
+                           width="130">
+          </el-table-column>
+          <el-table-column label="操作"
+                           width="240">
+            <template slot-scope="scope">
+              <el-breadcrumb separator="|">
+                <el-breadcrumb-item>
+                  <el-button type="text"
+                             @click="goMerchandise(scope.$index)">编辑</el-button>
+                </el-breadcrumb-item>
+                <el-breadcrumb-item>
+                  <el-button @click.native.prevent="deleteRow(scope.$index, tableData)"
+                             type="text">
+                    删除
+                  </el-button>
 
-              </el-breadcrumb-item>
-            </el-breadcrumb>
-          </template>
-        </el-table-column>
-      </el-table>
+                </el-breadcrumb-item>
+              </el-breadcrumb>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <el-dialog title="添加商品"
+                 :visible.sync="centerDialogVisible"
+                 width="30%"
+                 center
+                 class="centerDialogVisible">
+        <div>商品id
+          <el-input placeholder="商品id"
+                    v-model="inputTian.id"
+                    clearable>
+          </el-input>
+        </div>
+        <div>名称
+          <el-input placeholder="名称"
+                    v-model="inputTian.name"
+                    clearable>
+          </el-input>
+        </div>
+        <div>类型
+          <el-input placeholder="类型"
+                    v-model="inputTian.type"
+                    clearable>
+          </el-input>
+        </div>
+        <div>金额
+          <el-input placeholder="金额"
+                    v-model="inputTian.money"
+                    clearable>
+          </el-input>
+        </div>
+        <div>积分
+          <el-input placeholder="积分"
+                    v-model="inputTian.integral"
+                    clearable>
+          </el-input>
+        </div>
+        <div>排序
+          <el-input placeholder="排序"
+                    v-model="inputTian.sort"
+                    clearable>
+          </el-input>
+        </div>
+        <div>已售
+          <el-input placeholder="已售"
+                    v-model="inputTian.sold"
+                    clearable>
+          </el-input>
+        </div>
+        <span slot="footer"
+              class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">取 消</el-button>
+          <el-button type="primary"
+                     @click="Tianjia">确 定</el-button>
+        </span>
+      </el-dialog>
     </div>
-    <el-dialog title="添加商品"
-               :visible.sync="centerDialogVisible"
-               width="30%"
-               center
-               class="centerDialogVisible">
-      <div>商品id
-        <el-input placeholder="商品id"
-                  v-model="inputTian.id"
-                  clearable>
-        </el-input>
-      </div>
-      <div>名称
-        <el-input placeholder="名称"
-                  v-model="inputTian.name"
-                  clearable>
-        </el-input>
-      </div>
-      <div>类型
-        <el-input placeholder="类型"
-                  v-model="inputTian.type"
-                  clearable>
-        </el-input>
-      </div>
-      <div>金额
-        <el-input placeholder="金额"
-                  v-model="inputTian.money"
-                  clearable>
-        </el-input>
-      </div>
-      <div>积分
-        <el-input placeholder="积分"
-                  v-model="inputTian.integral"
-                  clearable>
-        </el-input>
-      </div>
-      <div>排序
-        <el-input placeholder="排序"
-                  v-model="inputTian.sort"
-                  clearable>
-        </el-input>
-      </div>
-      <div>已售
-        <el-input placeholder="已售"
-                  v-model="inputTian.sold"
-                  clearable>
-        </el-input>
-      </div>
-      <span slot="footer"
-            class="dialog-footer">
-        <el-button @click="centerDialogVisible = false">取 消</el-button>
-        <el-button type="primary"
-                   @click="Tianjia">确 定</el-button>
-      </span>
-    </el-dialog>
   </div>
 </template>
 <script>
@@ -203,13 +206,19 @@ export default {
     Tianjia () {
       this.centerDialogVisible = false
       this.tableData1.push(this.inputTian)
-      for (let key in this.inputTian) {
-        key = null
-      }
+    },
+    goMerchandise (index) {
+      const rows = JSON.stringify(this.tableData1)
+      this.$router.push({ path: '/home/merchandise', query: { rows, index } })
     }
   },
   mounted () {
     this.tableData = this.tableData1
+    if (this.$route.query.rows) {
+      const index = JSON.parse(this.$route.query.index)
+      const rows = JSON.parse(this.$route.query.rows)
+      this.tableData1[index] = rows
+    }
   }
 }
 </script>

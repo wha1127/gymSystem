@@ -71,10 +71,8 @@ export default {
 
     }
   },
-  props: ['isShowOrder'],
   methods: {
     goPage () {
-      this.isShowOrder()
       this.$router.back()
     },
     deleteRow (index, rows) {

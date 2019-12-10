@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="isShow">
+    <div>
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :offset="2"
@@ -69,8 +69,6 @@
         </el-table>
       </div>
     </div>
-    <router-view v-if="!isShow"
-                 :isShowOrder="isShowOrder"></router-view>
   </div>
 </template>
 <script>
@@ -78,7 +76,6 @@ export default {
   name: 'order',
   data () {
     return {
-      isShow: true,
       inputid: '',
       select: '',
       select1: '',
@@ -108,11 +105,7 @@ export default {
       rows.splice(index, 1);
     },
     goDetail () {
-      this.isShowOrder()
-      this.$router.push('/home/order/detail')
-    },
-    isShowOrder () {
-      this.isShow = !this.isShow
+      this.$router.push('/home/detail')
     },
     goID () {
       let inputid = this.inputid * 1
