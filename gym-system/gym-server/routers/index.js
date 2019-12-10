@@ -114,22 +114,32 @@ router.get('/auto_login', function (req, res) {
    })
 })
 
-router.post('/role/update', async (req, res) => {
+router.post('/role/add', async (req, res) => {
   const role = req.body;
   console.log(role)
   let roles
   try {
      roles = await Roles.create({...req.body})
     console.log(roles)
-    res.json({status:0,msg:'更新角色成功'})
+    res.json({status:0,msg:'创建角色成功'})
   } catch (error) {
     console.log(error)
-    res.json({status: 1, msg: '更新角色权限失败'});
+    res.json({status: 1, msg: '创建角色权限失败'});
   }
 });
 
+router.get('/role/get',(req,res) => {
+  Roles.find({})
+    .then(roles => {
+      res.json({status:0,data:roles})
+    })
+    .catch(error => {
+      res.json({status:1,msg:'获取权限列表失败'})
+    })
+})
+
 router.get('/coaches/get',(req,res)=>{
-  Coaches.find()
+  Coaches.find({})
     .then(coaches =>{
       res.json({status: 0,data: coaches})
     })

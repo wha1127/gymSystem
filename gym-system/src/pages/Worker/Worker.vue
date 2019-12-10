@@ -84,8 +84,7 @@
                          :default-checked-keys="[]"
                          :props="defaultProps"
                          :filter-node-method="filterNode"
-                         getCheckedNodes
-                         getCheckedKeys
+                         @check="getCurrentKey"
                          ref="tree">
                 </el-tree>
               </div>
@@ -109,12 +108,12 @@
 </template>
 
 <script>
-import { reqRole } from '../../api'
+import { reqRole,reqRoleList } from '../../api'
 export default {
   name: 'Worker',
   methods: {
     goPage () {
-      this.$router.back
+      this.$router.back()
     },
     filterNode (value, data) {
       if (!value) return true;
@@ -123,19 +122,30 @@ export default {
     async postMessage () {
       let { name, pwd, phone, value: status, filterText: menus } = this
       status === '启用' ? status = true : status = false
-      menus = ['']
-      console.log(name, pwd, phone,status,  menus)
+      console.log(name, pwd, phone, status, menus)
       const result = await reqRole({ name, pwd, phone, status, menus })
       console.log(result)
     },
-    getCheckedNodes(event){
+    getCurrentKey (event) {
       console.log(event)
+      const { filterText } = this
+      if (filterText.indexOf(event.label) === -1) {
+        if(event.children){
+          for(let i=0;i<event.children.length;i++){
+            if(filterText.indexOf(event.children[i].label) === -1){
+              filterText.push(event.children[i].label)
+            }
+          }
+        }
+        this.filterText.push(event.label)
+      }
+      console.log(filterText)
     },
-    getCheckedKeys(event){
-      console.log(event)
-    }
   },
-
+  async mounted() {
+    const result = await reqRoleList()
+    console.log(result)
+  },
   data () {
     return {
       value: '启用',

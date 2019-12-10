@@ -21,12 +21,20 @@ export const reqAutoLogin = () => ajax({
 
 export const reqRole = ({name,phone,pwd,status,menus}) => ajax({
   method:'POST',
-  url:BASE+'/role/update',
+  url:BASE+'/role/add',
   data:{
     name,
     phone,
     pwd,
     status,
     menus
+  }
+})
+
+export const reqRoleList = () => ajax({
+  method:'GET',
+  url:BASE+'/role/get',
+  data:{
+  
   }
 })
