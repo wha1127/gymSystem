@@ -149,13 +149,13 @@ router.get('/coaches/get',(req,res)=>{
 });
 
 router.post('/coaches/add',(req,res)=>{
- const {name,avatar,rank,memberCount,sort,sex,star,id} = req.body;
+ const {name,avatar,rank,memberCount,sort,gender,star} = req.body;
  try{
    let coach = Coaches.create({...req.body});
    res.json({
      status: 0 ,
      data:{
-      name,avatar,rank,memberCount,sort,sex,star,_id:id
+      name,avatar,rank,memberCount,sort,gender,star,id:Date.now()
      }
    });
  }catch(error){
@@ -177,9 +177,9 @@ router.post('/coaches/delete',(req,res)=>{
 router.get('/order/get',(req,res) => {
   const orders = require('../data/orders.json')
   Orders.find({})
-    .then(orders => {
+    .then(
       res.json({status:0,data:orders})
-    })
+    )
     .catch(error => {
       res.json({status:1,msg:'获取订单列表失败'})
     })
