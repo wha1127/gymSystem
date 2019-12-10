@@ -141,9 +141,8 @@ export default {
 .container
   width 100%
   height 100%
-  background-color rgba(0, 0, 255, .08)
+  // background-color rgba(0, 0, 255, .08)
   .content
-    margin-top 30px
     width 100%
     height 90%
     padding 15px

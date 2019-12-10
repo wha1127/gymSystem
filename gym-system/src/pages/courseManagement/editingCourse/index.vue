@@ -68,6 +68,7 @@
             <!-- 上传封面 -->
             <div class="select">
               <span class="message-item4">上传封面:</span>
+
               <el-upload action="https://jsonplaceholder.typicode.com/posts/"
                          list-type="picture-card"
                          :on-preview="handlePictureCardPreview"
@@ -82,6 +83,7 @@
                      :src="dialogImageUrl"
                      alt="">
               </el-dialog>
+
               <img src="./image/jiaolian.png"
                    alt>
             </div>

@@ -10,7 +10,9 @@ import {
   Button, Table, TableColumn, Input, InputNumber, Select, Option, Card, DatePicker,
   Checkbox, TimeSelect, TimePicker, Tag, Upload, FormItem, Form, Dialog, MessageBox
 } from 'element-ui'
-
+//将头部注册为全局组件
+import Header from './components/Header/Header.vue'
+import Split from './components/Split/Split.vue'
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 3000 };
 Vue.prototype.$alert = MessageBox.alert;
 Vue.config.productionTip = false
@@ -33,7 +35,10 @@ Vue.use(TimeSelect)
 Vue.use(TimePicker)
 Vue.use(Tag)
 Vue.use(Upload)
+Vue.component(Header.name, Header)
+Vue.component(Split.name, Split)
 new Vue({
+
   router,
   store, //注册vuex
   render: h => h(App),

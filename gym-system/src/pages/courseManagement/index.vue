@@ -1,14 +1,14 @@
 <template>
-  <div class="container">
-    <div class="container-one"
-         v-if="isShow">
+  <div class="container-list">
+    <div class="container-one">
       <div class="content">
         <!-- 课程头部 -->
         <header class="title">
           <span class="title-left">课程列表</span>
           <div class="title-right">
             <el-button type="primary"
-                       plain>切换到课程表</el-button>
+                       plain
+                       @click="goTimetable">切换到课程表</el-button>
             <el-button type="primary">创建课程</el-button>
 
           </div>
@@ -30,7 +30,7 @@
               <img src="./image/jianshen1.png"
                    alt>
             </el-table-column>
-            <el-table-column prop="name"
+            <el-table-column prop="className"
                              label="课程名称">
             </el-table-column>
             <el-table-column prop="people"
@@ -88,7 +88,6 @@
       </div>
 
     </div>
-    <router-view v-if="!isShow"></router-view>
   </div>
 
 </template>
@@ -96,11 +95,10 @@
 export default {
   data () {
     return {
-      isShow: true,
       input: "",
       tableData: [{
         date: '',
-        name: '王小虎',
+        className: '',
         people: '24',
         price: '5000元',
         discounts: '4800元 省4天',
@@ -122,19 +120,22 @@ export default {
     }
   },
   methods: {
+    goTimetable () {
+      //console.log(this.$router.history.current.path)
+      this.$router.push("/classList")
+    },
     goToClass () {
-      this.isShow = !this.isShow
-      this.$router.push("/courseManagement/classList")
+
+      this.$router.push("/classList")
     },
     editingClass () {
-      this.isShow = !this.isShow
-      this.$router.push("/courseManagement/editingCourse")
+      this.$router.push("/editingCourse")
     }
   }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-.container
+.container-list
   width 100%
   height 100%
   background-color rgba(0, 0, 255, .08)
@@ -142,7 +143,6 @@ export default {
     width 100%
     height 100%
     .content
-      margin-top 30px
       width 100%
       height 90%
       padding 15px
@@ -173,6 +173,9 @@ export default {
           margin-left 5px
       .con
         margin-left 10%
+        .shu
+          color #cccccc
+          margin 10px
         .cell
           text-align center
 </style>

@@ -21,36 +21,30 @@ export default [
   {
     path: '/activity',
     component: Activity
-    /*  children: [// 二级路由
-       {
-         path: '',
- 
-       }
-     ] */
   },
 
   {
     path: '/courseManagement',
-    component: CourseManagement,
-    children: [
-      {
-        path: '/courseManagement/classList',
-        component: ClassList,
-        children: [
-          {
-            path: '/courseManagement/classList/redactClass',
-            component: RedactClass
-          }
-        ]
-      },
-      {
-        path: '/courseManagement/editingCourse',
-        component: EditingCourse
-      }
-    ]
+    component: CourseManagement
+  },
+  {
+    path: '/redactClass',
+    component: RedactClass
+  },
+  {
+    path: '/classList',
+    component: ClassList,
+  },
+  {
+    path: '/editingCourse',
+    component: EditingCourse
   },
   {
     path: '/timeTable',
     component: TimeTable
+  },
+  {
+    path: '/', //重定向
+    redirect: '/courseManagement'
   }
 ]

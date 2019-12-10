@@ -1,7 +1,6 @@
 <template>
-  <div class="container">
-    <div class="container-one"
-         v-if="isCompile">
+  <div class="container-class">
+    <div class="container-one">
       <div class="content">
         <!-- 课程头部 -->
         <header class="title">
@@ -85,7 +84,6 @@
       </div>
 
     </div>
-    <router-view v-if="!isCompile"></router-view>
   </div>
 
 </template>
@@ -93,7 +91,6 @@
 export default {
   data () {
     return {
-      isCompile: true,
       input: "",
       tableData: [{
         ClassName: '基础普拉提',
@@ -112,33 +109,23 @@ export default {
       }],
       options: [{
         value: '选项1',
-        label: '黄金糕'
+        label: '进行中'
       }, {
         value: '选项2',
-        label: '双皮奶'
-      }, {
-        value: '选项3',
-        label: '蚵仔煎'
-      }, {
-        value: '选项4',
-        label: '龙须面'
-      }, {
-        value: '选项5',
-        label: '北京烤鸭'
+        label: '已结束'
       }],
       value: ''
     }
   },
   methods: {
     goToRC () {
-      this.isCompile = !this.isCompile
-      this.$router.push('/courseManagement/classList/redactClass')
+      this.$router.push('/redactClass')
     }
   }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
-.container
+.container-class
   width 100%
   height 100%
   background-color rgba(0, 0, 255, .08)
@@ -146,7 +133,6 @@ export default {
     width 100%
     height 100%
     .content
-      margin-top 30px
       width 100%
       height 90%
       padding 15px
