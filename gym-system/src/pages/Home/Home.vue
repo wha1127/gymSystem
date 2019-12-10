@@ -40,34 +40,48 @@
           <span class="title">小程序管理</span>
         </div>
         <ul class="manange">
-          <li>
+          <router-link to="/classList">
+            <li>
             <img src="./images/形状 6.png" alt="">
             <p>课程管理</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/timeTable">
+            <li>
             <img src="./images/形状 5.png" alt="">
             <p>课程表</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/order">
+            <li>
             <img src="./images/形状 7.png" alt="">
             <p>预约管理</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/coach">
+            <li>
             <img src="./images/jiaolian 拷贝.png" alt="">
             <p>教练管理</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/activity">
+            <li>
             <img src="./images/形状 8.png" alt="">
             <p>活动编辑</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/gym">
+            <li>
             <img src="./images/形状 9.png" alt="">
             <p>场馆图片</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="banner">
+            <li>
             <img src="./images/形状 13.png" alt="">
             <p>banner管理</p>
           </li>
+          </router-link>
         </ul>
       </el-card>
       <el-card class="box-card">

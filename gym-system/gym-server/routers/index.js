@@ -148,10 +148,13 @@ router.get('/coaches/get',(req,res)=>{
     })
 });
 
-router.post('/coaches/add',(req,res)=>{
+router.post('/coaches/add',async (req,res)=>{
  const {name,avatar,rank,memberCount,sort,gender,star} = req.body;
+ console.log(req.body)
+ let coach
  try{
-   let coach = Coaches.create({...req.body});
+  coach = await Coaches.create({...req.body});
+  console.log(coach)
    res.json({
      status: 0 ,
      data:{
