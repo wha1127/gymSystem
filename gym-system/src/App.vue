@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
@@ -26,3 +27,20 @@ export default {
   margin-top: 60px;
 }
 </style>
+=======
+    <router-view></router-view>
+  </div>
+</template>
+<script>
+export default {
+  name: 'App',
+  components: {}
+}
+</script>
+<style lang="stylus" rel="stylesheet/stylus">
+#app
+  width 100%
+  height 100%
+  background-color #ddd
+</style>
+>>>>>>> 教练列表,预约管理,banner图静态页面搭建完毕
