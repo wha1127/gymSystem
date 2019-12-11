@@ -57,11 +57,7 @@
                    list-type="picture-card"
                    :on-preview="handlePictureCardPreview"
                    :on-remove="handleRemove">
-          <div class="iconDiv">
-            <i class="el-icon-plus"></i>
-          </div>
-          <p style="height:30px">添加商品图片</p>
-          <p style="height:60px">(最多可上传5张图片, 建议尺寸750x750px，2M以内)</p>
+          <i class="el-icon-plus"></i>
         </el-upload>
         <el-dialog :visible.sync="dialogVisible">
           <img width="100%"
@@ -147,19 +143,6 @@ body
     color #353535
     .el-upload
       margin-left 10px
-      display flex
-      flex-direction column
-      align-items center
-      &.el-upload--picture-card
-        line-height 20px
-      .iconDiv
-        width 28px
-        height 28px
-        line-height 28px
-        text-align center
-        background-color #1C6CE6
-        border-radius 100%
-        margin-top 30px
 .boxBottom
   width 104px
   height 40px

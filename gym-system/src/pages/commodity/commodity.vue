@@ -37,7 +37,7 @@
                      @click="goShop">搜索</el-button>
         </el-col>
       </div>
-      <div class="bodyBottom">
+      <div class="bodyBottomShop">
         <el-table :data="tableData"
                   style="width: 100%">
           <el-table-column prop="id"
@@ -95,25 +95,25 @@
                  class="centerDialogVisible">
         <div>商品id
           <el-input placeholder="商品id"
-                    v-model="inputTian.id"
+                    v-model="inputTian.name"
                     clearable>
           </el-input>
         </div>
         <div>名称
           <el-input placeholder="名称"
-                    v-model="inputTian.name"
+                    v-model="inputTian.type"
                     clearable>
           </el-input>
         </div>
         <div>类型
           <el-input placeholder="类型"
-                    v-model="inputTian.type"
+                    v-model="inputTian.price"
                     clearable>
           </el-input>
         </div>
         <div>金额
           <el-input placeholder="金额"
-                    v-model="inputTian.money"
+                    v-model="inputTian.point"
                     clearable>
           </el-input>
         </div>
@@ -146,6 +146,7 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'commodity',
   data () {
@@ -155,33 +156,21 @@ export default {
       select: '',
       select1: '',
       inputTian: {
-        id: null,
-        name: '',
+        name: null,
         type: '',
-        money: 0,
+        price: '',
+        point: 0,
         integral: 0,
         sort: 0,
         sold: 0
       },
       tableData: [],
-      tableData1: [{
-        id: 7736,
-        name: '运动手环',
-        type: '运动',
-        money: 200,
-        integral: 5000,
-        sort: 1,
-        sold: 20
-      }, {
-        id: 7746,
-        name: '手表',
-        type: '运动',
-        money: 200,
-        integral: 5000,
-        sort: 2,
-        sold: 20
-      }]
     }
+  },
+  computed: {
+    ...mapState({
+      goods: state => state.goods.goods
+    })
   },
   methods: {
     goPage () {
@@ -193,9 +182,9 @@ export default {
     goShop () {
       let input = this.input
       this.tableData = []
-      this.tableData1.forEach((item) => {
+      this.goods.forEach((item) => {
         if (!input) {
-          this.tableData = this.tableData1
+          this.tableData = this.goods
         } else {
           if (item.name.startsWith(input)) {
             this.tableData.push(item)
@@ -205,7 +194,8 @@ export default {
     },
     Tianjia () {
       this.centerDialogVisible = false
-      this.tableData1.push(this.inputTian)
+      const { name, type, price, point } = this.inputTian
+      this.$store.dispatch('addgoods', { name, type, price, point })
     },
     goMerchandise (index) {
       const rows = JSON.stringify(this.tableData1)
@@ -213,12 +203,8 @@ export default {
     }
   },
   mounted () {
-    this.tableData = this.tableData1
-    if (this.$route.query.rows) {
-      const index = JSON.parse(this.$route.query.index)
-      const rows = JSON.parse(this.$route.query.rows)
-      this.tableData1[index] = rows
-    }
+    this.$store.dispatch('getggoods')
+    this.tableData = this.goods
   }
 }
 </script>
@@ -269,7 +255,7 @@ body
     margin-left 80px
     .el-input
       width 180px
-.bodyBottom
+.bodyBottomShop
   width 1280px
   border-radius 10px
   margin 30px auto
