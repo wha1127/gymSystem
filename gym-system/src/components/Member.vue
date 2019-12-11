@@ -4,7 +4,7 @@
       <el-row :gutter="20">
         <el-col :offset="2"
                 :span="1">
-          <el-button siza="mini">返回</el-button>
+          <el-button siza="mini" @click="goPage">返回</el-button>
         </el-col>
         <el-col :span="10"
                 :offset="1">
@@ -26,15 +26,17 @@
       <div slot="header" class="clearfix">
         <span>会员基础信息</span>
       </div>
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="姓名">
-          <el-input v-model="form.name" placeholder="输入会员姓名(必填)" ></el-input>
+      <el-form ref="form" :model="form" style="width:1280px;">
+        <el-form-item label="姓名" style="width:1000px;">
+          <el-input style="width:400px;" v-model="form.name" placeholder="输入会员姓名(必填)" ></el-input>
         </el-form-item>
-        <el-form-item label="手机号">
-          <el-input label-width="40px" v-model="form.phone" placeholder="输入手机号(必填)"></el-input>
-        </el-form-item>
-        <el-form-item label="性别">
-          <el-select v-model="form.region" placeholder="男">
+        <el-form :model="numberValidateForm" ref="numberValidateForm"  class="demo-ruleForm">
+          <el-form-item style="width:800px;" label="手机号"  prop="phone" :rules="[{required: true,message: '手机号不能为空'},{type: 'number',message:'手机号必须为数字'}]">
+            <el-input style="width:400px;" label-width="40px" type="phone" v-model.number="numberValidateForm.phone" autocomplete="off" placeholder="输入手机号(必填)"></el-input>
+          </el-form-item>
+        </el-form>
+        <el-form-item style="width:600px;" label="性别">
+          <el-select v-model="form.sex" placeholder="男">
             <el-option label="男" value="man"></el-option>
             <el-option label="女" value="woman"></el-option>
           </el-select>
@@ -116,8 +118,8 @@
               </el-table-column>
               <el-table-column prop="state" label="状态" width="90px"></el-table-column>
               <el-table-column label="操作" width="120px">
-                <template slot-scope="scope">
-                  <el-button @click="handleClick(scope.row)" type="text" size="small">选择班级</el-button>
+                <template>
+                  <el-button type="text" size="small">选择班级</el-button>
                 </template>
               </el-table-column>
             </el-table>
@@ -138,8 +140,17 @@
 <script>
 export default {
   name: 'Member',
+  methods: {
+    goPage () {
+      this.$router.back()
+    }
+  },
   data () {
     return {
+      numberValidateForm:{
+        id: '',
+        phone: ''
+      },
       formLabelWidth: '120px',
       dialogTableVisible: false,
       dialogFormVisible: false, 

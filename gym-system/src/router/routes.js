@@ -23,6 +23,6 @@ export default [
   },
   {
     path: '/',
-    redirect: '/worker'
+    redirect: '/person'
   },
 ]

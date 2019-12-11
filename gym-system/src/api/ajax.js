@@ -1,5 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
+import router from '../router'
 import store from '../store'
 
 axios.interceptors.request.use((config) => {

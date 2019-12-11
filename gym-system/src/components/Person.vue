@@ -27,16 +27,16 @@
     </div>
     <el-table  :data="tableData" border style="width: 1280px" class="body" >
       <el-table-column prop="name" label="姓名" width="256"></el-table-column>
-      <el-table-column prop="account" label="账号" width="256"> </el-table-column>
-      <el-table-column prop="power" label="权限页面"  width="270"> </el-table-column>
-      <el-table-column prop="state" label="状态" width="240"></el-table-column>
+      <el-table-column prop="phone" label="账号" width="256"> </el-table-column>
+      <el-table-column prop="menus" label="权限页面"  width="270"> </el-table-column>
+      <el-table-column prop="status" label="状态" width="240"></el-table-column>
       <el-table-column label="操作" width="256">
         <template slot-scope="scope">
           
           <router-link to="/worker">
             <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
           </router-link>
-          <el-button type="text" size="small">停用</el-button>
+          <el-button type="text" size="small" @click="personClick(scope)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -44,66 +44,86 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'Person',
+  data() {
+    return {
+      tableData: [{
+        name: '王小虎',
+        account: '12345678910',
+        power: '超级管理员',
+        state: '正常'
+      }, {
+        name: '王小虎',
+        account: '12345678910',
+        power: '会员卡管理,会员管理,课程表,商品管理',
+        state: '正常'
+      }, {
+        name: '王小虎',
+        account: '12345678910',
+        power: '教练管理,活动编辑',
+        state: '正常'
+      }, {
+        name: '王小虎',
+        account: '12345678910',
+        power: '财务',
+        state: '正常'
+      }, {
+        name: '王小虎',
+        account: '12345678910',
+        power: '前台',
+        state: '正常'
+      }, {
+        name: '王小虎',
+        account: '12345678910',
+        power: '教练管理,活动编辑',
+        state: '正常'
+      }, {
+        name: '王小虎',
+        account: '12345678910',
+        power: '会员卡管理,会员管理,课程表,商品管理',
+        state: '正常'
+      },{
+        name: '王小虎',
+        account: '12345678910',
+        power: '教练管理,活动编辑',
+        state: '正常'
+      },{
+        name: '王小虎',
+        account: '12345678910',
+        power: '会员卡管理,会员管理,课程表,商品管理',
+        state: '正常'
+      }]
+    }
+  },
+  async mounted(){
+    
+      await this.$store.dispatch('saveStaff')
+      console.log(this.staff)
+      this.staff = this.staff.map(staff => staff.status === 'true' ? '启用' : '停用')
+    this.tableData = this.staff
+    
+    
+  },
+  computed:{
+    ...mapState({
+      staff : state => state.user.staff
+    })
+  },
   methods: {
     goPage () {
-      this.$router.back
+      this.$router.back()
     },
     handleClick(row) {
      console.log(row);
-    }
+    },
+    personClick (scope) {
+      this.tableData.splice(scope.$index,1);
+    },
+    
+
   },
-  data() {
-      return {
-        tableData: [{
-          name: '王小虎',
-          account: '12345678910',
-          power: '超级管理员',
-          state: '正常'
-        }, {
-          name: '王小虎',
-          account: '12345678910',
-          power: '会员卡管理,会员管理,课程表,商品管理',
-          state: '正常'
-        }, {
-          name: '王小虎',
-          account: '12345678910',
-          power: '教练管理,活动编辑',
-          state: '正常'
-        }, {
-          name: '王小虎',
-          account: '12345678910',
-          power: '财务',
-          state: '正常'
-        }, {
-          name: '王小虎',
-          account: '12345678910',
-          power: '前台',
-          state: '正常'
-        }, {
-          name: '王小虎',
-          account: '12345678910',
-          power: '教练管理,活动编辑',
-          state: '正常'
-        }, {
-          name: '王小虎',
-          account: '12345678910',
-          power: '会员卡管理,会员管理,课程表,商品管理',
-          state: '正常'
-        },{
-          name: '王小虎',
-          account: '12345678910',
-          power: '教练管理,活动编辑',
-          state: '正常'
-        },{
-          name: '王小虎',
-          account: '12345678910',
-          power: '会员卡管理,会员管理,课程表,商品管理',
-          state: '正常'
-        }]
-      }
-    }
 }
 </script>
 

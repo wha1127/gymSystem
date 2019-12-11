@@ -21,13 +21,13 @@
 
   <div class="list-title">
     <div>会员列表</div>
-    <router-link to="/worker">
+    <router-link to="/member">
       <el-button 
       size="mini"
       type="primary"
       class="title-button"
       >
-      添加用户
+      添加会员
       </el-button>
     </router-link>
 
@@ -36,36 +36,31 @@
   <!--搜索开始 -->
   <el-card class="list-card"  style="width:1290px">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
-      <el-form-item label="用户ID" >
-        <el-input style="width:300px" v-model="formInline.id" placeholder="请输入用户ID"></el-input>
-      </el-form-item>
-      <el-form-item label="手机号码">
-        <el-input style="width:380px" v-model="formInline.phone" placeholder="请输入手机号码"></el-input>
-      </el-form-item>
-      <el-form-item style="width:390px" label="性别">
-        <el-select v-model="formInline.sex" placeholder="全部">
-          <el-option label="男" value="boy"></el-option>
-          <el-option label="女" value="girl"></el-option>
-        </el-select>
-      </el-form-item>
+      <el-form :model="numberValidateForm" ref="numberValidateForm"  class="demo-ruleForm">
+        <el-form-item label="用户ID" prop="id" :rules="[{required: true,message: 'ID不能为空'},{type:'number',message:'ID必须为数字'}]">
+          <el-input style="width:310px" type="id" v-model.number="numberValidateForm.id" autocomplete="off" placeholder="请输入用户ID"></el-input>
+        </el-form-item>
+        <el-form-item style="width:450px;" label="手机号码" prop="phone" :rules="[{required: true,message: '手机号不能为空'},{type: 'number',message:'手机号必须为数字'}]">
+          <el-input style="width:330px;" type="phone" v-model.number="numberValidateForm.phone" autocomplete="off" placeholder="请输入手机号码"></el-input>
+        </el-form-item>
+        <el-form-item  style="width:320px;" label="性别">
+          <el-select style="width:220px;" v-model="formInline.sex" placeholder="全部">
+            <el-option label="男" value="boy"></el-option>
+            <el-option label="女" value="girl"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      
 
       <el-form-item  label="用户昵称">
         <el-input style="width:290px"  v-model="formInline.nickname" placeholder="请输入用户昵称"></el-input>
       </el-form-item>
-      <el-form-item style="width:400px" label="注册时间" required>
-        <el-col :span="10">
+      <el-form-item style="width:420px" label="注册时间" required>
           <el-form-item>
-            <el-date-picker type="date" placeholder="选择日期"  style="width: 138px;"></el-date-picker>
+            <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  style="width: 320px;"></el-date-picker>
           </el-form-item>
-        </el-col>
-        <el-col class="line" :span="2">-</el-col>
-        <el-col :span="10">
-          <el-form-item prop="date2">
-            <el-time-picker placeholder="选择时间"  style="width: 138px;"></el-time-picker>
-          </el-form-item>
-        </el-col>
       </el-form-item>
-      <el-form-item style="width:420px" label="用户状态">
+      <el-form-item style="width:420px;" label="用户状态">
         <el-select v-model="formInline.status" placeholder="全部">
           <el-option label="登录" value="login"></el-option>
           <el-option label="未登录" value="outer"></el-option>
@@ -128,6 +123,11 @@ export default {
   name: 'List',
   data () {
     return {
+      numberValidateForm:{
+        id: '',
+        phone: ''
+      },
+      value1: '',
       currentPage: 4,
       tableData: [{
         id: '998',
@@ -231,8 +231,8 @@ body
   line-height 3
 .list-title
   width 1280px
-  height 90px
-  line-height 90px
+  height 80px
+  line-height 80px
   margin 0 auto
   position relative
   div
@@ -248,7 +248,7 @@ body
     top 24px
     right 0
 .list-card
-  width 1290px
+  width 1280px
   margin 0 auto
   .demo-form-inline
     .chaXun
