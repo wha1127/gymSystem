@@ -1,30 +1,45 @@
-import { reqGetGoods, reqAddGoods } from "../../api"
-import { GET_GOODS, ADD_GOODS } from "../mutations-type.js"
+import { reqAddGoods, reqGetGoods, reqDeleteGoods } from "../../api"
+import { ADD_GOODS, GET_GOODS, DELE_GOODS } from "../mutations-type.js"
 const state = {
-  goods: null
+  good: []
 }
 const mutations = {
-  [GET_GOODS] (state, goods) {
-    state.goods = goods
-  },
+  //添加商品
   [ADD_GOODS] (state, goods) {
-    state.goods = goods
+    state.good.push(goods)
+  },
+  //获取商品
+  [GET_GOODS] (state, good) {
+    state.good = good
+  },
+  //删除商品
+  [DELE_GOODS] (state, id) {
+    let good = []
+    state.good.forEach(item => {
+      if (item._id !== id) {
+        good.push(item)
+      }
+    });
+    state.good = good
   }
 }
 const actions = {
-  async getggoods ({ commit }) {
+  async addgoods ({ commit }, { name, type, price, points }) {
+    const result = await reqAddGoods({ name, type, price, points })
+    if (result.data.status === 0) {
+      commit(ADD_GOODS, result.data.data)
+    }
+  },
+  async getgood ({ commit }) {
     const result = await reqGetGoods()
     if (result.data.status === 0) {
-      console.log(333)
       commit(GET_GOODS, result.data.data)
     }
   },
-  async addgoods ({ commit }, { name, type, price, point }) {
-    const result = await reqAddGoods({ name, type, price, point })
-    console.log(result.data, { name, type, price, point })
+  async deletegoods ({ commit }, id) {
+    const result = await reqDeleteGoods(id)
     if (result.data.status === 0) {
-      console.log(111)
-      commit(ADD_GOODS, result.data.data)
+      commit(DELE_GOODS, id)
     }
   }
 }

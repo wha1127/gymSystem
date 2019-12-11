@@ -134,7 +134,7 @@ export const reqDeleteCourse = (title) => ajax({
   url:BASE+'/course/delete',
   data:{
     title
-  }
+  }                                                                        
 })
 
 export const reqUpdateCourse = ({
@@ -173,14 +173,14 @@ export const reqGetGoods = () => ajax({
 })
 
 //增加商品
-export const reqAddGoods = ({name,type,price,point}) => ajax({
+export const reqAddGoods = ({name,type,price,points}) => ajax({
   method:'POST',
   url:BASE+'/goods/add',
   data:{
     name,
     type,
     price,
-    point
+    points
   }
 })
 
@@ -194,7 +194,7 @@ export const reqDeleteGoods = (id) =>ajax({
 })
 
 //更新商品
-export const reUpdateGoods = ({id,type,price,name,point}) => ajax({
+export const reUpdateGoods = ({id,type,price,name,points}) => ajax({
   method:'POST',
   url:BASE+'/goods/update',
   data:{
@@ -202,6 +202,6 @@ export const reUpdateGoods = ({id,type,price,name,point}) => ajax({
     type,
     price,
     name,
-    point
+    points
   }
 })
