@@ -77,7 +77,7 @@
                 <span class="shu">|</span>
                 <el-button type="text"
                            size="small"
-                           @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                           @click="handleDelete(scope.$index)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -100,6 +100,7 @@ export default {
   },
   async mounted () {
     await this.$store.dispatch('getClass')
+
     this.$nextTick(() => {
       this.newClasses = this.classes
     })
@@ -121,6 +122,9 @@ export default {
     },
     //删除行数
     handleDelete (index) {
+      const title = this.newClasses[index].title
+      console.log(this.newClasses)
+      this.$store.dispatch('deleteClass', title)
       this.newClasses.splice(index, 1)
     },
     goTimetable () {

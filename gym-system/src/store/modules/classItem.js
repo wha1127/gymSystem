@@ -1,5 +1,5 @@
 import { GET_CLASS, UPDATE_CLASS, ADD_CLASS, DELETE_CLASS } from '../mutaiton-type.js'
-import { reqCourse, reqAddCourse } from '../../api/index'
+import { reqCourse, reqAddCourse, reqDeleteCourse } from '../../api/index'
 
 
 
@@ -23,9 +23,15 @@ const mutations = {
     state.classes.push(classes)
   },
   // 删除
-  [DELETE_CLASS] () {
-
-  }
+  /* [DELETE_CLASS] (state, id) {
+    let classes = []
+    state.classes.forEach((item) => {
+      if (item._id !== id) {
+        classes.push(item)
+      }
+    })
+    state.classes = classes
+  } */
 }
 
 // 获取异步的
@@ -45,6 +51,11 @@ const actions = {
     await reqAddCourse(newClass)
     commit(ADD_CLASS, newClass)
 
+  },
+  //删除
+  async deleteClass ({ commit }, title) {
+    await reqDeleteCourse(title)
+    // commit(DELETE_CLASS, id)
   }
 }
 
