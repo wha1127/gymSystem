@@ -15,7 +15,7 @@ const Coaches = require('../models/Coaches')
 const Orders = require('../models/Orders')
 const Students = require('../models/Students')
 const Courses = require('../models/Courses')
-
+const Goods = require('../models/Goods')
 
 router.get('/captcha', function (req, res) {
   var captcha = svgCaptcha.create({
@@ -158,7 +158,7 @@ router.post('/coaches/add',async (req,res)=>{
    res.json({
      status: 0 ,
      data:{
-      name,avatar,rank,memberCount,sort,gender,star,id:Date.now()
+      name,avatar:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3278521633,970603739&fm=26&gp=0.jpg',rank,memberCount,sort,gender,star,id:Date.now()
      }
    });
  }catch(error){
@@ -221,8 +221,8 @@ router.get('/course/get',(req,res) => {
     })
 })
 
-router.post('/course/add',(req,res) => {
-  Courses.create({...req.body})
+router.post('/course/add',async (req,res) => {
+  await Courses.create({...req.body})
     .then(course => {
       res.json({status:0,data:course})
     })
@@ -244,13 +244,55 @@ router.post('/course/delete',(req,res) => {
 
 router.post('/course/update',(req,res) => {
   const {title} = req.body
-  Courses.findByIdAndUpdate({title})
+  Courses.updateOne({title})
   .then(oldCourse => {
     res.json({status:0,data:{title}})
   })
   .catch(error => {
     res.json({status:1,msg:'更新课程失败'})
   })
+})
+
+router.get('/goods/get',(req,res) => {
+  Goods.find({})
+    .then(goods => {
+      res.json({status:0,data:goods})
+    })
+    .catch(error => {
+      res.json({status:1,message:'获取商品列表失败'})
+    })
+})
+
+router.post('/goods/add',async (req,res) => {
+  const good = await Goods.create({...req.body,id:Date.now()})
+    .then(() => {
+      res.json({status:0,data:good})
+    })
+    .catch(error => {
+      res.json({status:1,message:"添加商品失败"})
+    })
+})
+
+router.post('/goods/delete',(req,res) => {
+  const {id} = req.body
+  Goods.deleteOne({_id:id})
+    .then(oldGood => {
+      res.json({status:0,message:"删除成功"})
+    })
+    .catch(error => {
+      res.json({status:1,message:'删除失败'})
+    })
+})
+
+router.post('/goods/update',(req,res) => {
+  const good = req.body
+  Goods.findByIdAndUpdate({_id:good.id},good)
+    .then(oldGood => {
+      res.json({status:0,message:"更新成功"})
+    })
+    .catch(error => {
+      res.json({status:1,message:'更新失败'})
+    })
 })
 
 module.exports = router;
