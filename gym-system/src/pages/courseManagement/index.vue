@@ -92,6 +92,7 @@
 
 </template>
 <script>
+import {reqAddCourse} from '../../api'
 export default {
   data () {
     return {
@@ -130,6 +131,10 @@ export default {
     },
     editingClass () {
       this.$router.push("/editingCourse")
+    },
+    async addCourse(){
+      const result = await reqAddCourse()
+      console.log(result)
     }
   }
 }

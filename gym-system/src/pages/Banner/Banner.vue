@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="banner-outer" v-if="isShow">
+      <Header/>
       <div class="main-header">
         <el-card class="box-card">
           <el-row :gutter="20">
             <el-col :offset="2" :span="1">
-              <el-button size="mini" @click="$router.push('/order')">返回</el-button>
+              <el-button size="mini" @click="$router.back()">返回</el-button>
             </el-col>
             <el-col :span="10" :offset="1">
               <el-breadcrumb separator="/" id="boxBodyBooton">
@@ -114,8 +115,11 @@ export default {
   width 100%
   height 100%
   overflow scroll
+  display flex
+  justify-content center
+  flex-wrap wrap
   .main-header
-    width 100%
+    width 1440px
     .el-breadcrumb
       line-height 2
   .bannerContainer

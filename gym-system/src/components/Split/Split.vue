@@ -1,6 +1,6 @@
 <template>
   <div class="splitContainer">
-    <el-button class="return">返回</el-button>
+    <el-button class="return" @click="$router.back()">返回</el-button>
     <span class="blue">功能面板</span>
     <span class="split">/</span>
     <span>banner图列表</span>
@@ -9,7 +9,10 @@
 
 <script>
 export default {
-  name:"Split"
+  name:"Split",
+  mounted() {
+    console.log(this.$router)
+  },
 }
 </script>
 

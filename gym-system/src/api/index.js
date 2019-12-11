@@ -162,3 +162,46 @@ export const reqUpdateCourse = ({
     attention
   }
 })
+
+//获取商品列表
+export const reqGetGoods = () => ajax({
+  method:'GET',
+  url:BASE+'/goods/get',
+  data:{
+
+  }
+})
+
+//增加商品
+export const reqAddGoods = ({name,type,price,point}) => ajax({
+  method:'POST',
+  url:BASE+'/goods/add',
+  data:{
+    name,
+    type,
+    price,
+    point
+  }
+})
+
+//删除商品
+export const reqDeleteGoods = (id) =>ajax({
+  method:'POST',
+  url:BASE+'/goods/delete',
+  data:{
+    id
+  }
+})
+
+//更新商品
+export const reUpdateGoods = ({id,type,price,name,point}) => ajax({
+  method:'POST',
+  url:BASE+'/goods/update',
+  data:{
+    id,
+    type,
+    price,
+    name,
+    point
+  }
+})

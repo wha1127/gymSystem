@@ -14,12 +14,18 @@ const router =  new VueRouter({
 })
 const paths = ["/home","/worker","/gym","/order","/coach","/banner",'/activity','/courseManagement','/redactClass','/classList','/editingCourse','/timeTable',]
 router.beforeEach((to,from,next) => {
-  console.log(this)
+  
   if(paths.indexOf(to.path) !== -1){
     if(!store.state.user.token){
       router.push('/login')
     }
   } 
+  if(to.path === '/login'){
+    
+    if(store.state.user.token){
+      router.push('home')
+    }
+  }
   next()
 })
 
