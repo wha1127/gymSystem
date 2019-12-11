@@ -38,14 +38,14 @@
               ></el-option>
             </el-select>
           </div>
-          <el-button type="primary" plain>搜索</el-button>
+          <el-button type="primary" plain @click="searchCoach">搜索</el-button>
         </div>
         <div class="coachList">
-          <el-table :data="tableData" style="width: 100%" @row-click="getRow">
+          <el-table :data="coaches" style="width: 100%">
             <el-table-column prop="_id" label="教练id" width="140"></el-table-column>
             <el-table-column prop="avatar" label="头像" width="140">
               <template slot-scope="scope">
-                <img class="coachAvatar" :src="scope.row.avatar" alt="用户头像">
+                <img class="coachAvatar" :src="scope.row.avatar" alt="用户头像" />
               </template>
             </el-table-column>
             <el-table-column prop="name" label="姓名" width="140"></el-table-column>
@@ -55,9 +55,11 @@
             <el-table-column prop="gender" label="性别" width="140"></el-table-column>
             <el-table-column prop="star" label="星级" width="140"></el-table-column>
             <el-table-column prop="options" label="操作">
-              <el-button type="text" size="small" @click="goDetail">编辑</el-button>
-              <span class="shu">|</span>
-              <el-button type="text" size="small" @click="getRow">删除</el-button>
+              <template slot-scope="scope">
+                <el-button type="text" size="small" @click="goDetail">编辑</el-button>
+                <span class="shu">|</span>
+                <el-button type="text" size="small" @click="deleteCoach(scope.$index,scope.row)">删除</el-button>
+              </template>
             </el-table-column>
           </el-table>
           <el-pagination
@@ -67,7 +69,7 @@
             :page-sizes="[5, 10, 15, 20]"
             :page-size="5"
             layout="total, sizes, prev, pager, next"
-            :total="30"
+            :total="coaches.length"
             style="{height:'300px'}"
           ></el-pagination>
         </div>
@@ -77,7 +79,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import { reqCoach, reqDeleteCoach } from '../../api'
 export default {
   name: 'Coach',
@@ -95,10 +97,9 @@ export default {
           value: '女',
           label: '女'
         }
-      ],
-      tableData: []
+      ]
       // ,
-      // tableData: [
+      // coaches: [
       //   {
       //     coachId: '0012',
       //     coachAvatar: '小狗',
@@ -113,8 +114,15 @@ export default {
       // ]
     }
   },
+  watch: {
+    name() {
+      if (this.name === '') {
+        return this.getCoaches()
+      }
+    }
+  },
   methods: {
-    ...mapActions(['getCoaches','delCoach']),
+    ...mapActions(['getCoaches', 'delCoach']),
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`)
     },
@@ -128,25 +136,30 @@ export default {
     isShowDetail() {
       this.isShow = !this.isShow
     },
-    async getRow(row, column, event){
-      console.log(row, column, event)
-      console.log(row._id)
-      const result = await reqDeleteCoach(row._id)
-      
+    deleteCoach(index) {
+      this.coaches.splice(index, 1)
+      this.$store.commit('delete_coach', this.coaches)
+    },
+    searchCoach() {
+      const searchName = this.name
+      console.log(searchName)
+      const coaches = this.coaches.filter(coach => {
+        return coach.name.includes(searchName)
+      })
+      this.$store.commit('search_Coach', coaches)
     }
   },
-  async mounted() {
-    
+  mounted() {
     this.isShow = true
-    await this.getCoaches()
-    console.log(this.coaches)
-    this.$nextTick(() => {
-      this.tableData = this.coaches
-    })
+    this.getCoaches()
+    // console.log(this.coaches)
+    // this.$nextTick(() => {
+    //   this.coaches = this.coaches
+    // })
   },
   computed: {
     ...mapState({
-      coaches:state => state.coach.coaches
+      coaches: state => state.coach.coaches
     })
   }
 }
@@ -154,7 +167,7 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
 .coach-outer
   width 100%
-  height 100%
+  background-color #ddd
   .coach-main
     width 100%
     .main-header

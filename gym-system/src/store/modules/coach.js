@@ -1,4 +1,4 @@
-import { RECEIVE_COACHES, ADD_COACH, UPDATE_COACH, DELETE_COACH } from '../mutation-type'
+import { RECEIVE_COACHES, ADD_COACH, UPDATE_COACH, DELETE_COACH ,SEARCH_COACH} from '../mutation-type'
 import { reqCoach, reqAddCoach, reqDeleteCoach } from '../../api'
 const state = {
   coaches: []
@@ -14,8 +14,11 @@ const mutations = {
   [UPDATE_COACH] (state, coach) {
     state.coach = coach
   },
-  [DELETE_COACH] (state, coach) {
-    state.coach = coach
+  [DELETE_COACH] (state, coaches) {
+    state.coaches = coaches
+  },
+  [SEARCH_COACH] (state, coaches) {
+    state.coaches = coaches
   }
 }
 

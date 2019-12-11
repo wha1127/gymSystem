@@ -97,7 +97,6 @@
 import { mapActions } from 'vuex'
 export default {
   name: 'CoachDetail',
-  props: ['isShowDetail'],
   data() {
     return {
       dialogImageUrl: '',
@@ -140,7 +139,6 @@ export default {
     ...mapActions(['addCoach']),
     gabackCoach() {
       this.$router.back()
-      this.isShowDetail()
     },
     handleRemove(file, fileList) {
       console.log(file, fileList)
