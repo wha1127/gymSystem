@@ -45,7 +45,14 @@ const actions = {
     }
 } 
 
-const getters = {}
+const getters = {
+  menus(state){
+    return state.staff.map(item => {
+      item.menus = item.menus+','
+      return item
+    })
+  }
+}
 
 export default {
   mutations,

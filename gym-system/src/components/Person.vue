@@ -26,15 +26,15 @@
       </router-link>
     </div>
     <el-table  :data="tableData" border style="width: 1280px" class="body" >
-      <el-table-column prop="name" label="姓名" width="256"></el-table-column>
-      <el-table-column prop="phone" label="账号" width="256"> </el-table-column>
-      <el-table-column prop="menus" label="权限页面"  width="270"> </el-table-column>
-      <el-table-column prop="status" label="状态" width="240"></el-table-column>
-      <el-table-column label="操作" width="256">
+      <el-table-column prop="name" label="姓名" width="256" align="center"></el-table-column>
+      <el-table-column prop="phone" label="账号" width="256" align="center"> </el-table-column>
+      <el-table-column prop="menus" label="权限页面"  width="270" align="center"> </el-table-column>
+      <el-table-column prop="status" label="状态" width="240" align="center"></el-table-column>
+      <el-table-column label="操作" width="256" align="center" >
         <template slot-scope="scope">
           
-          <router-link to="/worker">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">编辑</el-button>
+          <router-link to="/add">
+            <el-button @click="handleClick(scope.row)" type="text" size="small" style="margin-right:20px">编辑</el-button>
           </router-link>
           <el-button type="text" size="small" @click="personClick(scope)">删除</el-button>
         </template>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 export default {
   name: 'Person',
   data() {
@@ -100,16 +100,16 @@ export default {
   async mounted(){
     
       await this.$store.dispatch('saveStaff')
-      console.log(this.staff)
-      this.staff = this.staff.map(staff => staff.status === 'true' ? '启用' : '停用')
+      console.log(this.menus)
     this.tableData = this.staff
-    
+    console.log(this.staff)
     
   },
   computed:{
     ...mapState({
       staff : state => state.user.staff
-    })
+    }),
+    ...mapGetters(['menus'])
   },
   methods: {
     goPage () {

@@ -36,15 +36,15 @@
   <!--搜索开始 -->
   <el-card class="list-card"  style="width:1290px">
     <el-form :inline="true" :model="formInline" class="demo-form-inline">
-      <el-form :model="numberValidateForm" ref="numberValidateForm"  class="demo-ruleForm">
-        <el-form-item label="用户ID" prop="id" :rules="[{required: true,message: 'ID不能为空'},{type:'number',message:'ID必须为数字'}]">
-          <el-input style="width:310px" type="id" v-model.number="numberValidateForm.id" autocomplete="off" placeholder="请输入用户ID"></el-input>
+      <el-form :model="numberValidateForm" ref="numberValidateForm"  class="demo-ruleForm" label-position="left">
+        <el-form-item label="用户ID" prop="id" >
+          <el-input @input="getInput" style="width:300px" type="id" v-model.number="numberValidateForm.id" autocomplete="off" placeholder="请输入用户ID"></el-input>
         </el-form-item>
-        <el-form-item style="width:450px;" label="手机号码" prop="phone" :rules="[{required: true,message: '手机号不能为空'},{type: 'number',message:'手机号必须为数字'}]">
-          <el-input style="width:330px;" type="phone" v-model.number="numberValidateForm.phone" autocomplete="off" placeholder="请输入手机号码"></el-input>
+        <el-form-item  style="width:450px;margin-left:10px" label="手机号码" prop="phone" >
+          <el-input @input="getPhone" style="width:330px;" type="phone" v-model.number="numberValidateForm.phone" autocomplete="off" placeholder="请输入手机号码"></el-input>
         </el-form-item>
-        <el-form-item  style="width:320px;" label="性别">
-          <el-select style="width:220px;" v-model="formInline.sex" placeholder="全部">
+        <el-form-item  style="width:340px:margin-left:15px " label="性别" label-position="right">
+          <el-select style="width:280px;margin-left:25px" v-model="formInline.sex" placeholder="全部" label-position="right">
             <el-option label="男" value="boy"></el-option>
             <el-option label="女" value="girl"></el-option>
           </el-select>
@@ -52,29 +52,29 @@
       </el-form>
       
 
-      <el-form-item  label="用户昵称">
+      <el-form-item  label="用户昵称" label-position="left">
         <el-input style="width:290px"  v-model="formInline.nickname" placeholder="请输入用户昵称"></el-input>
       </el-form-item>
-      <el-form-item style="width:420px" label="注册时间" required>
+      <el-form-item style="width:420px;margin-left: 26px;" label="注册时间" required >
           <el-form-item>
             <el-date-picker v-model="value1" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  style="width: 320px;"></el-date-picker>
           </el-form-item>
       </el-form-item>
-      <el-form-item style="width:420px;" label="用户状态">
-        <el-select v-model="formInline.status" placeholder="全部">
+      <el-form-item style="width:360px; margin-left:22px" label="用户状态" label-position="right">
+        <el-select v-model="formInline.status" placeholder="全部" style="width:280px;" label-position="right">
           <el-option label="登录" value="login"></el-option>
           <el-option label="未登录" value="outer"></el-option>
         </el-select>
       </el-form-item>
 
 
-       <el-form-item style="width:990px"  label="用户姓名">
+       <el-form-item style="width:990px"  label="用户姓名" label-position="left">
         <el-input v-model="formInline.name" placeholder="请输入用户姓名"></el-input>
       </el-form-item>
 
 
       <el-form-item>
-        <el-button class="chaXun" type="primary" @click="onSubmit">查询</el-button>
+        <el-button class="chaXun" type="primary" @click="search" style="margin-left:95px">查询</el-button>
       </el-form-item>
     </el-form>
   </el-card>
@@ -83,23 +83,23 @@
   <!-- 用户id表开始 -->
   <div class="list-content">
     <el-table :data="tableData" border class="list-bottom">
-      <el-table-column  fixed  prop="id"  label="用户id"  width="80px" ></el-table-column>
-      <el-table-column  fixed  prop="head"  label="头像"  width="80px">
+      <el-table-column  fixed  prop="id"  label="用户id"  width="80px" align="center" ></el-table-column>
+      <el-table-column  fixed  prop="head"  label="头像"  width="80px" align="center">
         <template>
           <img src="../images/02.jpg" style="width:50px;height:50px">
         </template>
       </el-table-column>
-      <el-table-column  fixed  prop="name"  label="用户姓名" width="100px">  </el-table-column>
-      <el-table-column  fixed  prop="nickname"  label="用户昵称" width="100px">  </el-table-column>
-      <el-table-column  fixed  prop="phone"  label="手机号"  width="115px"> </el-table-column>
-      <el-table-column  fixed  prop="sex"  label="性别"  width="80px"> </el-table-column>
-      <el-table-column  fixed  prop="count"  label="进场次数"  width="100px"> </el-table-column>
-      <el-table-column  fixed  prop="timeCard"  label="时间卡"  width="100px"> </el-table-column>
-      <el-table-column  fixed  prop="countCard"  label="次卡"  width="100px"> </el-table-column>
-      <el-table-column  fixed  prop="number"  label="课程数量"  width="100px"> </el-table-column>
-      <el-table-column  fixed  prop="joinDate"  label="注册时间"  width="124px"> </el-table-column>
-      <el-table-column  fixed  prop="status"  label="状态"  width="100px"> </el-table-column>
-      <el-table-column  fixed  prop="opteration"  label="操作" width="100px"></el-table-column>
+      <el-table-column  fixed  prop="name"  label="用户姓名" width="100px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="nickname"  label="用户昵称" width="100px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="phone"  label="手机号"  width="115px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="sex"  label="性别"  width="80px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="count"  label="进场次数"  width="100px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="timeCard"  label="时间卡"  width="100px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="countCard"  label="次卡"  width="100px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="number"  label="课程数量"  width="100px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="joinDate"  label="注册时间"  width="124px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="status"  label="状态"  width="100px" align="center"> </el-table-column>
+      <el-table-column  fixed  prop="opteration"  label="操作" width="100px" align="center"></el-table-column>
     </el-table>
 
     <div class="block">
@@ -130,12 +130,12 @@ export default {
       value1: '',
       currentPage: 4,
       tableData: [{
-        id: '998',
+        id: '996',
         phone: '12345678910',
         sex: '男',
         nickname: '康师傅',
         status: '正常',
-        name: '张小刚',
+        name: '秃秃怪',
         head: '',
         count: '20',
         countCard: '剩余20次',
@@ -144,12 +144,12 @@ export default {
         joinDate: '2018-08-03',
         opteration: '编辑'
       },{
-        id: '998',
+        id: '997',
         phone: '12345678910',
-        sex: '男',
-        nickname: '康师傅',
+        sex: '女',
+        nickname: '今麦郎',
         status: '正常',
-        name: '张小刚',
+        name: '王大锤',
         head: '',
         count: '20',
         countCard: '剩余20次',
@@ -158,12 +158,12 @@ export default {
         joinDate: '2018-08-03',
         opteration: '编辑'
       },{
-        id: '998',
-        phone: '12345678910',
+        id: '996',
+        phone: '90187654321',
         sex: '男',
-        nickname: '康师傅',
+        nickname: '白象',
         status: '正常',
-        name: '张小刚',
+        name: '范思辙',
         head: '',
         count: '20',
         countCard: '剩余20次',
@@ -172,12 +172,12 @@ export default {
         joinDate: '2018-08-03',
         opteration: '编辑'
       },{
-        id: '998',
+        id: '997',
         phone: '12345678910',
-        sex: '男',
-        nickname: '康师傅',
+        sex: '女',
+        nickname: '汤达人',
         status: '正常',
-        name: '张小刚',
+        name: '东鹏',
         head: '',
         count: '20',
         countCard: '剩余20次',
@@ -186,12 +186,12 @@ export default {
         joinDate: '2018-08-03',
         opteration: '编辑'
       },{
-        id: '998',
+        id: '996',
         phone: '12345678910',
         sex: '男',
-        nickname: '康师傅',
+        nickname: '合味道',
         status: '正常',
-        name: '张小刚',
+        name: '香港街道',
         head: '',
         count: '20',
         countCard: '剩余20次',
@@ -208,6 +208,7 @@ export default {
         status: '',
         name: '',
       },
+      seacrContent:''
     }
   },
   methods: {
@@ -217,10 +218,22 @@ export default {
     handleCurrentChange(val) {
       console.log('每页${val}条');
     },
-    onSubmit () {
-      console.log('submit');
+    getInput (event) {
+      this.searchContent = event
+    },
+    getPhone (event) {
+      this.searchContent = event 
+    },
+    search(){
+      const {tableData,searchContent} = this
+      // this.tableData = tableData.filter(data => searchContent === data.id)
+      console.log(searchContent)
+      this.tableData = tableData.filter(data => searchContent === data.phone)
+      this.serachContent = ""
+      
     }
-  }
+  },
+
 }
 </script>
 

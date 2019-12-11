@@ -3,11 +3,15 @@ import Worker from '../components/Worker.vue'
 import Person from '../components/Person.vue'
 import Member from '../components/Member.vue'
 import List from '../components/List.vue'
+import Add from '../components/Add.vue'
 // 暴露路由数组配置
 export default [
   {
     path: '/worker',
     component: Worker
+  },{
+    path: '/add',
+    component: Add
   },
   {
     path: '/person',

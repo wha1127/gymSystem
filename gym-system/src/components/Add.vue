@@ -14,7 +14,7 @@
                           id="boxBodyBooton">
             <el-breadcrumb-item :to="{ path:'/'}">功能面板</el-breadcrumb-item>
             <el-breadcrumb-item>工作人员</el-breadcrumb-item>
-            <el-breadcrumb-item>添加工作人员</el-breadcrumb-item>
+            <el-breadcrumb-item>编辑工作人员</el-breadcrumb-item>
           </el-breadcrumb>
         </el-col>
       </el-row>
@@ -23,12 +23,12 @@
 
     <!-- 编辑工作人员 开始 -->
     <div class="content-title">
-      <div>添加工作人员</div>
+      <div>编辑工作人员</div>
     </div>
     <!-- 编辑工作人员 结束 -->
 
     <!-- 中间主体内容开始 -->
-    <el-main class="worker-content">
+    <el-main class="add-content">
       <div class="content">
         <div class="content-form">
           <p>
@@ -62,7 +62,7 @@
             </el-select>
           </p>
           <div><span>账号权限:</span>
-            <div class="worker-power">
+            <div class="add-power">
 
               <el-tree class="filter-tree"
                       :data="data"
@@ -83,7 +83,7 @@
     <!-- 中间主体内容结束 -->
 
     <!-- 底部按钮 -->
-    <el-footer class="worker-footer">
+    <el-footer class="add-footer">
       <div>
         <el-button type="primary"
                     @click="postMessage" >保存</el-button>
@@ -95,36 +95,12 @@
 </template>
 
 <script>
-import { reqRole } from '../api'
+// import { reqRole } from '../api'
 export default {
-  name: 'Worker',
+  name: 'Add',
   methods: {
     goPage () {
       this.$router.back()
-    },
-    filterNode (value, data) {
-      if (!value) return true;
-      return data.label.indexOf(value) !== -1;
-    },
-    async postMessage () {
-      let { name, pwd, phone, value: status, filterText: menus } = this
-      console.log(name, pwd, phone,status,  menus)
-      const result = await reqRole({ name, pwd, phone, status, menus })
-      console.log(result)
-      this.$router.replace('/person')
-    },
-    getCurrentKey(event1,event2){
-      console.log(event1,event2)
-      let {filterText} = this
-      for(let i=0;i<event2.checkedNodes.length;i++){
-        if(filterText.indexOf(event2.checkedNodes[i].label) === -1){
-          filterText.push(event2.checkedNodes[i].label)
-        }
-      }
-      
-      this.filterText = filterText
-      filterText = {}
-      console.log(this.filterText)
     },
   },
   
@@ -136,11 +112,11 @@ export default {
       pwd: '',
       filterText: [],
       options: [{
-        label: '启用',
-        value: '启用',
+        value: '选项1',
+        label: '启用'
       }, {
-        label: '未启用',
-        value: '未启用',
+        value: '选项2',
+        label: '未启用'
       }],
       data: [{
         id: 1,
@@ -212,7 +188,7 @@ body
     margin-left 126px
     position absolute
     top 30px
-.worker-content
+.add-content
   width 1280px
   margin 0 auto
   .content
@@ -236,13 +212,13 @@ body
         width 330px
       .el-input2
         margin-left 15px
-      .worker-power
+      .add-power
         width 342px
         height 100%
         border 1px solid #fff
         margin-left 69px
         margin-top -24px
-.worker-footer
+.add-footer
   width 1280px
   margin 0 auto
 </style>

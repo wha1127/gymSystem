@@ -1,6 +1,6 @@
 import ajax from './ajax'
 const BASE = '/api'
-
+//获取登录接口
 export const reqLogin = ({
   name,
   pwd,
@@ -14,7 +14,7 @@ export const reqLogin = ({
     captcha
   }
 })
-
+// 自动登录接口
 export const reqAutoLogin = () => ajax({
   method: 'GET',
   url: BASE + `/auto_login`,
@@ -22,7 +22,7 @@ export const reqAutoLogin = () => ajax({
     needToken: true
   }
 })
-
+//
 export const reqRole = ({
   name,
   phone,
@@ -94,15 +94,19 @@ export const reqDeleteCoach = (name) => ajax({
     name
   }
 })
-
+// 获取课程信息
 export const reqGetStudents = () => ajax({
   method: 'GET',
-  url: BASE + '/student/get',
+  url: BASE + '/student/get'
+})
+export const reqCourse = () => ajax({
+  method: 'GET',
+  url: BASE + '/course/get',
   data: {
 
   }
 })
-
+// 增加课程
 export const reqAddCourse = ({
   title,
   price,
@@ -128,15 +132,15 @@ export const reqAddCourse = ({
     attention
   }
 })
-
+// 删除课程
 export const reqDeleteCourse = (title) => ajax({
-  method:"POST",
-  url:BASE+'/course/delete',
-  data:{
+  method: "POST",
+  url: BASE + '/course/delete',
+  data: {
     title
   }
 })
-
+// 更新课程
 export const reqUpdateCourse = ({
   title,
   price,
