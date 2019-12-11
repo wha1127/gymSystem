@@ -113,7 +113,6 @@ export default {
 .banner-outer
   width 100%
   height 100%
-  overflow scroll
   .main-header
     width 100%
     .el-breadcrumb

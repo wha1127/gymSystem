@@ -38,9 +38,19 @@ const actions = {
     // console.log(result)
     if (result.data.status === 0) {
       const coach = result.data.data
+      console.log(coach)
       commit(ADD_COACH, coach)
     } else {
       console.log("添加教练信息出错")
+    }
+  },
+
+  //删除教练信息
+  async delCoach ({commit},name) {
+    const result = await reqDeleteCoach(name)
+    console.log(result)
+    if(result.data.status === 0){
+      console.log("删除成功")
     }
   }
 }

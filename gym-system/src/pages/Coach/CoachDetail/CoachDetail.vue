@@ -79,7 +79,7 @@
       </div>
       <div class="detail-introduce">
         <el-form :model="ruleForm" :rules="rules">
-          <el-form-item label="个人简介:" prop="desc1">
+          <el-form-item label="会员种类:" prop="desc1">
             <el-input type="textarea" v-model="ruleForm.desc1"></el-input>
           </el-form-item>
           <el-form-item label="训练介绍:" prop="desc2">
@@ -118,8 +118,8 @@ export default {
           { required: true, message: '请输入教练姓名', trigger: 'blur' },
           { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
         ],
-        star: [{ required: true, message: '请选择性别', trigger: 'change' }],
-        gender: [{ required: true, message: '请选择星级', trigger: 'change' }],
+        gender: [{ required: true, message: '请选择性别', trigger: 'change' }],
+        star: [{ required: true, message: '请选择星级', trigger: 'change' }],
         grade: [{ required: true, message: '请选择级别', trigger: 'change' }],
         ranking: [
           { required: true, message: '请选择教练排序', trigger: 'blur' },

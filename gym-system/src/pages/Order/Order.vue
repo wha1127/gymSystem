@@ -20,18 +20,18 @@
         <p class="header-left">预约管理</p>
       </div>
       <div class="orderList">
-        <el-table :data="tableData" style="width: 100%">
+        <el-table :data="orders" style="width: 100%">
           <el-table-column prop="userAvatar" label="头像" width="160">
             <img class="userAvatar" src="../../utils/images/user/dog.jpg" alt="用户头像" />
           </el-table-column>
-          <el-table-column prop="userName" label="用户姓名" width="160"></el-table-column>
-          <el-table-column prop="phoneNumber" label="手机号" width="160"></el-table-column>
-          <el-table-column prop="joinCourse" label="报名课程" width="160"></el-table-column>
-          <el-table-column prop="joinClass" label="报名班次" width="160"></el-table-column>
-          <el-table-column prop="joinDate" label="报名时间" width="160"></el-table-column>
-          <el-table-column prop="theState" label="状态">
+          <el-table-column prop="name" label="用户姓名" width="160"></el-table-column>
+          <el-table-column prop="phone" label="手机号" width="160"></el-table-column>
+          <el-table-column prop="class" label="报名课程" width="160"></el-table-column>
+          <el-table-column prop="orderedClass" label="报名班次" width="160"></el-table-column>
+          <el-table-column prop="orderedTime" label="报名时间" width="160"></el-table-column>
+          <el-table-column prop="status" label="状态">
             <template slot-scope="scope">
-              <el-select :value="scope.row.state" class="blue">
+              <el-select :value="scope.row.status" class="blue">
                 <el-option label="未确认" value="unconfirmed" style="color:#555"></el-option>
                 <el-option label="已报班" value="submitted" style="color:#06f"></el-option>
                 <el-option label="拒绝" value="refuse" style="color:#f00"></el-option>
@@ -53,72 +53,82 @@
   </div>
 </template>
 <script>
+import { mapState,mapActions} from 'vuex'
 export default {
   name: 'Order',
   data() {
     return {
-      theState: '',
-      tableData: [
-        {
-          userAvatar: '',
-          userName: '张小刚',
-          phoneNumber: '13257490494',
-          joinCourse: '基础普拉提',
-          joinClass: 'A班',
-          joinDate: '2019-12-10',
-          theState: '',
-          state: '已报名'
-        },
-        {
-          userAvatar: '',
-          userName: '张小刚',
-          phoneNumber: '13257490494',
-          joinCourse: '基础普拉提',
-          joinClass: 'A班',
-          joinDate: '2019-12-10',
-          theState: '',
-          state: '未确定'
-        },
-        {
-          userAvatar: '',
-          userName: '张小刚',
-          phoneNumber: '13257490494',
-          joinCourse: '基础普拉提',
-          joinClass: 'A班',
-          joinDate: '2019-12-10',
-          theState: '',
-          state: '拒绝'
-        },
-        {
-          userAvatar: '',
-          userName: '张小刚',
-          phoneNumber: '13257490494',
-          joinCourse: '基础普拉提',
-          joinClass: 'A班',
-          joinDate: '2019-12-10',
-          theState: '',
-          state: '已报名'
-        },
-        {
-          userAvatar: '',
-          userName: '张小刚',
-          phoneNumber: '13257490494',
-          joinCourse: '基础普拉提',
-          joinClass: 'A班',
-          joinDate: '2019-12-10',
-          theState: '',
-          state: '拒绝'
-        }
-      ]
+      theState: ''
+      // tableData: [
+      //   {
+      //     userAvatar: '',
+      //     userName: '张小刚',
+      //     phoneNumber: '13257490494',
+      //     joinCourse: '基础普拉提',
+      //     joinClass: 'A班',
+      //     joinDate: '2019-12-10',
+      //     theState: '',
+      //     state: '已报名'
+      //   },
+      //   {
+      //     userAvatar: '',
+      //     userName: '张小刚',
+      //     phoneNumber: '13257490494',
+      //     joinCourse: '基础普拉提',
+      //     joinClass: 'A班',
+      //     joinDate: '2019-12-10',
+      //     theState: '',
+      //     state: '未确定'
+      //   },
+      //   {
+      //     userAvatar: '',
+      //     userName: '张小刚',
+      //     phoneNumber: '13257490494',
+      //     joinCourse: '基础普拉提',
+      //     joinClass: 'A班',
+      //     joinDate: '2019-12-10',
+      //     theState: '',
+      //     state: '拒绝'
+      //   },
+      //   {
+      //     userAvatar: '',
+      //     userName: '张小刚',
+      //     phoneNumber: '13257490494',
+      //     joinCourse: '基础普拉提',
+      //     joinClass: 'A班',
+      //     joinDate: '2019-12-10',
+      //     theState: '',
+      //     state: '已报名'
+      //   },
+      //   {
+      //     userAvatar: '',
+      //     userName: '张小刚',
+      //     phoneNumber: '13257490494',
+      //     joinCourse: '基础普拉提',
+      //     joinClass: 'A班',
+      //     joinDate: '2019-12-10',
+      //     theState: '',
+      //     state: '拒绝'
+      //   }
+      // ]
     }
   },
   methods: {
+    ...mapActions(['getOrders']),
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`)
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`)
     }
+  },
+  computed:{
+    ...mapState({
+      orders: state => state.order.orders
+    })
+  },
+  mounted() {
+    this.getOrders()
   }
 }
 </script>
