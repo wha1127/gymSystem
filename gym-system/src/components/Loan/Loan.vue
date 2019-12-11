@@ -4,39 +4,31 @@
       <span class="title">借出手环清单</span>
     </div>
     <ul class="main1">
-      <li class="action" >00001234</li>
-      <li>00004567</li>
-      <li>00002345</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
-      <li>00003333</li>
+      <li :class="{action:isShowbulk===index}"  v-for="(item,index) in bill" :key='index' @click="addClass(index)">{{item}}</li>
+
+      
     </ul>
   </div>
 </template>
 <script>
 export default {
-  name:'Loan'
+  name:'Loan',
+  data() {
+    return {
+      bill:['00001111','00001112','00001113','00001114','00001115','00001116','00001117','00001118','00001119','00001110','00001120','000011121','000011122','000011123','000011124','000011125','000011126','000011127','000011128','000011129','000011130','000011131','000011132','000011133','000011134','000011135','000011136'],
+      lindex:''
+    }
+  },
+  computed: {
+    isShowbulk(){
+      return this.lindex
+    }
+  },
+  methods: {
+    addClass(index){
+      this.lindex = index
+    }
+  },
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

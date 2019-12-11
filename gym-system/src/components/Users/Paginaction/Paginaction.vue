@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <el-pagination
+    <!-- <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page.sync="currentPage2"
@@ -8,7 +8,7 @@
       :page-size="10"
       layout="sizes, prev, pager, next"
       :total="100">
-    </el-pagination>
+    </el-pagination> -->
   </div>
 </template>
 <script>
@@ -19,20 +19,12 @@ export default {
       currentPage2:1
     }
   },
-  methods: {
-    handleSizeChange(){
-
-    },
-    handleCurrentChange(){
-
-    },
-  },
+  
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .block
-  float right 
-  overflow hidden
-  margin-right 60px 
-  margin-bottom 70px
+  width 1400px
+  height 80px
+  background-color #f0f2f5
 </style>

@@ -12,12 +12,13 @@ export default [
     component: Member,
   },
   {
-    path: '/Member/Bianji',
+    path: '/Bianji',
     component: Bianji
   },
   {
     path: '/',
     redirect: '/Admission'
   },
+  
 
 ]

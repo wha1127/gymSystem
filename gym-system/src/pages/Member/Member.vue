@@ -10,7 +10,7 @@
       <li class="ban">
         <!-- <p>半年卡</p>
         <p>半年无限进场,送私教课</p> -->
-        <button @click="$router.push('/Member/Bianji')" class="alter"></button>
+        <button @click="$router.push('/Bianji')" class="alter"></button>
         <button class="start" ></button>
       </li>
       <li class="ci">

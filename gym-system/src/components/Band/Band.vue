@@ -1,4 +1,5 @@
 <template>
+<!-- 归还手环的弹窗 elementUi对话框组件 --> 
   <div>
     <el-button type="text" @click="centerDialogVisible = true">归还手环</el-button>
 
@@ -8,8 +9,8 @@
       <p class="phone">{{this.$attrs.change.phone}}</p>
       <input type="text" placeholder="请输入手牌编号" />
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="fang">确认归还</el-button>
-        <el-button @click="fang">归还并离场</el-button>
+        <!-- <el-button  @click="fang">确认归还</el-button> -->
+        <el-button type="primary" @click="fang">归还并离场</el-button>
       </span>
     </el-dialog>
   </div>
@@ -26,6 +27,7 @@ export default {
   methods: {
     fang(){
       this.$attrs.change.handle=!this.$attrs.change.handle
+      // this.$attrs.change.degree++
     }
   },
 }

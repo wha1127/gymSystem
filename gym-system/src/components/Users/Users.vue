@@ -78,7 +78,163 @@ export default {
           in: '2018-02-20  10:00',
           state: '已离场',
           handle: false
-        }
+        },
+        {
+          name: '刘雨',
+          phone: '13099999939',
+          sex: '男',
+          degree: '13',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: true
+        },
+        {
+          name: '王雨',
+          phone: '13099944999',
+          sex: '男',
+          degree: '335',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '赵雨',
+          phone: '13099933999',
+          sex: '女',
+          degree: '133',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: true
+        },
+        {
+          name: '钱雨',
+          phone: '13099999944',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '孙雨',
+          phone: '13033999999',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '李雨',
+          phone: '13399999999',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '周雨',
+          phone: '14099999999',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '吴雨',
+          phone: '13099992399',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '郑雨',
+          phone: '13099999923',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '欧阳雨',
+          phone: '13889999999',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '诸葛雨',
+          phone: '12229999999',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '夏侯雨',
+          phone: '13099998769',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
+        {
+          name: '东方雨',
+          phone: '15099999999',
+          sex: '男',
+          degree: '15',
+          time: '剩余70天',
+          num: '剩余28次',
+          how: '10',
+          in: '2018-02-20  10:00',
+          state: '已离场',
+          handle: false
+        },
       ],
       currentPage2: 3,
       
@@ -93,7 +249,7 @@ export default {
   methods:{
     handleClick(row){
      if(row.handle){
-       window.console.log('111')
+      //  window.console.log('111')
        row.state='入场'
      }else{
        row.state='离场'
