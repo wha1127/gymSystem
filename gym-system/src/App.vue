@@ -12,8 +12,11 @@ export default {
   //注册
   components: {
 
-  }
-
+  },
+  mounted () {
+    console.log(this)
+    this.$store.dispatch('getClass')
+  },
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">

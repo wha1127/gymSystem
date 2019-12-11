@@ -5,7 +5,8 @@
         <span class="title-left">课程表</span>
         <div class="title-right">
           <el-button type="primary"
-                     plain>切换到列表</el-button>
+                     plain
+                     @click="goToItem">切换到列表</el-button>
           <el-button type="primary">创建课程</el-button>
 
         </div>
@@ -133,6 +134,11 @@ export default {
         Week: ['基础普拉提', '18:30-19:30 王国强']
       }
       ]
+    }
+  },
+  methods: {
+    goToItem () {
+      this.$router.push('/courseManagement')
     }
   }
 }

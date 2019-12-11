@@ -4,7 +4,7 @@
                @click="goBack">返回</el-button>
     <span class="blue">功能面板</span>
     <span class="split">/</span>
-    <span>banner图列表</span>
+    <span>{{$route.meta[0]}}</span>
   </div>
 </template>
 
@@ -13,8 +13,12 @@ export default {
   name: "Split",
   methods: {
     goBack () {
+
       this.$router.back()
     }
+  },
+  mounted () {
+
   }
 }
 </script>

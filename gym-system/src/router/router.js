@@ -20,28 +20,34 @@ import RedactClass from '../pages/courseManagement/classList/redactClass'
 export default [
   {
     path: '/activity',
-    component: Activity
+    component: Activity,
+    meta: ['活动列表']
   },
 
   {
     path: '/courseManagement',
-    component: CourseManagement
+    component: CourseManagement,
+    meta: ['课程列表']
   },
   {
     path: '/redactClass',
-    component: RedactClass
+    component: RedactClass,
+    meta: ['编辑班级']
   },
   {
     path: '/classList',
     component: ClassList,
+    meta: ['瑜伽课班级列表']
   },
   {
     path: '/editingCourse',
-    component: EditingCourse
+    component: EditingCourse,
+    meta: ['编辑课程']
   },
   {
     path: '/timeTable',
-    component: TimeTable
+    component: TimeTable,
+    meta: ['课程表']
   },
   {
     path: '/', //重定向

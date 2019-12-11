@@ -5,6 +5,8 @@ import App from './App.vue'
 import router from './router'
 // 引入store 使用vuex
 import store from './store'
+/* // 引入表单验证
+import './vee-validate' */
 //引入ElementUI
 import {
   Button, Table, TableColumn, Input, InputNumber, Select, Option, Card, DatePicker,
