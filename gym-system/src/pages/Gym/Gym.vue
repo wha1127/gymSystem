@@ -14,8 +14,8 @@
         </el-table-column>
         <el-table-column label="场馆图片"
                          style="width: 25%" align="center" current-row-key> 
-          <template slot-scope="image">
-            <img v-for="(item,index) in image.gym" :src=item :key=index class="head_pic" />
+          <template slot-scope="scope">
+            <img v-for="(item,index) in scope" :src=item.image :key=index class="head_pic" />
           </template>
         </el-table-column>
         <el-table-column prop="address"
@@ -63,6 +63,7 @@ export default {
         province: '上海',
         city: '普陀区',
         address: '大堂',
+        image:'./image/xitong.png',
         zip: 200333
       }, {
         date: '2016-05-04',
@@ -70,6 +71,7 @@ export default {
         province: '上海',
         city: '普陀区',
         address: '跑步区',
+        image:'./image/形状 11.png',
         zip: 200333
       }, {
         date: '2016-05-01',
@@ -77,6 +79,7 @@ export default {
         province: '上海',
         city: '普陀区',
         address: '瑜伽',
+        image:'./image/right.png',
         zip: 200333
       }, {
         date: '2016-05-01',
@@ -84,13 +87,8 @@ export default {
         province: '上海',
         city: '普陀区',
         address: '瑜伽',
-        zip: 200333
+        image:'./image/right.png',
       }],
-      image:{
-        gym:[
-        './image/xitong.png','./image/right.png','./image/形状 11.png','./image/形状 11.png','./image/形状 11.png'
-      ]
-      }
     }
   },
 }

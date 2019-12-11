@@ -40,7 +40,7 @@
           <span class="title">小程序管理</span>
         </div>
         <ul class="manange">
-          <router-link to="/classList">
+          <router-link to="/courseManagement">
             <li>
             <img src="./images/形状 6.png" alt="">
             <p>课程管理</p>

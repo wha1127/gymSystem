@@ -7,6 +7,11 @@ import Order from '../pages/Order/Order.vue'
 import Banner from '../pages/Banner/Banner.vue'
 import AddBanner from '../pages/Banner/AddBanner/AddBanner.vue'
 import CoachDetail from '../pages/Coach/CoachDetail/CoachDetail.vue'
+import Commodity from "../pages/commodity/commodity.vue"
+import GoodsOrder from "../pages/goodsOrder/order.vue"
+import Detail from "../pages/goodsOrder/detail/detail.vue"
+import Merchandise from "../pages/commodity/merchandise/merchandise.vue"
+import Genre from "../pages/genre/genre.vue"
 //课程管理
 import Activity from '../pages/activity'
 //课程表
@@ -19,7 +24,7 @@ import ClassList from '../pages/courseManagement/classList'
 import EditingCourse from '../pages/courseManagement/editingCourse'
 //编辑班级 三级路由
 import RedactClass from '../pages/courseManagement/classList/redactClass'
-
+import GymEdit from '../pages/Gym/GymEdit/GymEdit.vue'
 export default [
   {
     path:"/login",
@@ -40,6 +45,10 @@ export default [
   {
     path: "/order",
     component: Order
+  },
+  {
+    path:'/gym/gymedit',
+    component:GymEdit
   },
   {
     path: "/coach",
@@ -85,6 +94,30 @@ export default [
   {
     path: '/timeTable',
     component: TimeTable
+  },
+  {
+    //商品管理
+    path: '/commodity',
+    component: Commodity
+  },
+  {
+    //编辑商品
+    path: '/merchandise',
+    component: Merchandise
+  },
+  {
+    //订单管理
+    path: '/goodsorder',
+    component: GoodsOrder
+  },
+  {
+    //查看订单详情
+    path: '/detail',
+    component: Detail
+  },
+  {
+    path: '/genre',
+    component: Genre
   },
   {
     path:"/",

@@ -264,13 +264,16 @@ router.get('/goods/get',(req,res) => {
 })
 
 router.post('/goods/add',async (req,res) => {
-  const good = await Goods.create({...req.body,id:Date.now()})
-    .then(() => {
+  console.log(req.body)
+  let good
+  try {
+     good = await Goods.create({...req.body})
+     console.log(good)
       res.json({status:0,data:good})
-    })
-    .catch(error => {
-      res.json({status:1,message:"添加商品失败"})
-    })
+    
+  } catch (error) {
+    res.json({status:1,message:"添加商品失败"})
+  }
 })
 
 router.post('/goods/delete',(req,res) => {
