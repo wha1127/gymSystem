@@ -136,7 +136,6 @@ input
       line-height 2
   .coachContainer
     width 1280px
-    height 700px
     margin 0 auto
     .coach-header
       width 100%

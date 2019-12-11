@@ -9,10 +9,10 @@ import router from './router/index.js'
 //引入store
 import store from './store/index.js'
 Vue.config.productionTip = false
-// new Vue({
-//   render: h => h(App),
-// }).$mount('#app')
 
+//把Header组件注册为全局组件
+import Header from './components/Header/Header.vue'
+Vue.component(Header.name, Header)
 
 Vue.use(ElementUI)
 

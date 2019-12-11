@@ -120,7 +120,6 @@ export default {
       line-height 2
   .bannerContainer
     width 1280px
-    height 700px
     margin 0 auto
     .banner-header
       width 100%

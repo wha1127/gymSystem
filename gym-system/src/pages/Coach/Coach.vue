@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <div class="coach-outer" v-if="isShow">
+  <div class="coach-outer">
+    <Header />
+    <div class="coach-main" v-if="isShow">
       <div class="main-header">
         <el-card class="box-card">
           <el-row :gutter="20">
@@ -19,7 +20,7 @@
       <div class="coachContainer">
         <div class="coach-header">
           <p class="header-left">教练列表</p>
-            <el-button class="header-right" type="primary" @click='goDetail'>新增教练</el-button>
+          <el-button class="header-right" type="primary" @click="goDetail">新增教练</el-button>
         </div>
         <div class="coach-search">
           <div class="coachName">
@@ -74,6 +75,8 @@
   </div>
 </template>
 <script>
+import { mapState, mapActions } from 'vuex'
+import {reqCoach} from '../../api';
 export default {
   name: 'Coach',
   data() {
@@ -90,7 +93,8 @@ export default {
           value: '女',
           label: '女'
         }
-      ],
+      ]
+      ,
       tableData: [
         {
           coachId: '0012',
@@ -129,6 +133,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['getCoaches']),
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`)
     },
@@ -143,8 +148,12 @@ export default {
       this.isShow = !this.isShow
     }
   },
-  mounted() {
+  async mounted() {
     this.isShow = true
+    this.getCoaches()
+  },
+  computed: {
+    ...mapState(['coaches'])
   }
 }
 </script>
@@ -152,93 +161,94 @@ export default {
 .coach-outer
   width 100%
   height 100%
-  overflow scroll
-  .main-header
+  overflow hidden
+  .coach-main
     width 100%
-    .el-breadcrumb
-      line-height 2
-  .coachContainer
-    width 1280px
-    height 700px
-    margin 0 auto
-    .coach-header
+    .main-header
       width 100%
-      height 60px
-      line-height 60px
-      display flex
-      justify-content space-between
-      align-items center
-      .header-left
-        height 25px
-        line-height 25px
-        font-size 20px
-        padding-left 10px
-        margin-left 20px
-        border-left 3px solid #02a774
-      .header-right
-        height 40px
-        font-size 16px
-        color #fff
-    .coach-search
-      padding-left 50px
-      margin-bottom 20px
-      border-radius 6px
-      background-color #fff
-      display flex
-      align-items center
-      height 60px
-      line-height 60px
-      .coachName
+      .el-breadcrumb
+        line-height 2
+    .coachContainer
+      width 1280px
+      margin 0 auto
+      .coach-header
+        width 100%
+        height 60px
+        line-height 60px
         display flex
+        justify-content space-between
         align-items center
-        margin-right 60px
-        p
-          width 100px
-        .el-input__inner
-          width 250px
-      .coachGender
-        margin-right 40px
-        span
-          margin-right 10px
-        .el-input__inner
-          width 100px
-      .el-button
-        text-align center
-    .coachList
-      width 100%
-      background-color #fff
-      border-radius 6px
-      .el-table
-        border-radius 6px
-        .cell
-          text-align center
-          .shu
-            color #ccc
-            margin 15px
-        .coachAvatar
-          width 100px
+        .header-left
+          height 25px
+          line-height 25px
+          font-size 20px
+          padding-left 10px
+          margin-left 20px
+          border-left 3px solid #02a774
+        .header-right
           height 40px
-        .has-gutter
-          tr
-            th
-              color #000
-              background-color #cff
-      .el-pagination
-        height 50px
-        line-height 50px
-        padding 20px
+          font-size 16px
+          color #fff
+      .coach-search
+        padding-left 50px
+        margin-bottom 20px
+        border-radius 6px
+        background-color #fff
         display flex
         align-items center
-        justify-content flex-end
-        button
-          border 1px solid #ccc
-          margin-right 5px
-          border-radius 4px
-        .el-pager
+        height 60px
+        line-height 60px
+        .coachName
           display flex
           align-items center
-          li
+          margin-right 60px
+          p
+            width 100px
+          .el-input__inner
+            width 250px
+        .coachGender
+          margin-right 40px
+          span
+            margin-right 10px
+          .el-input__inner
+            width 100px
+        .el-button
+          text-align center
+      .coachList
+        width 100%
+        background-color #fff
+        border-radius 6px
+        .el-table
+          border-radius 6px
+          .cell
+            text-align center
+            .shu
+              color #ccc
+              margin 15px
+          .coachAvatar
+            width 100px
+            height 40px
+          .has-gutter
+            tr
+              th
+                color #000
+                background-color #cff
+        .el-pagination
+          height 50px
+          line-height 50px
+          padding 20px
+          display flex
+          align-items center
+          justify-content flex-end
+          button
             border 1px solid #ccc
             margin-right 5px
             border-radius 4px
+          .el-pager
+            display flex
+            align-items center
+            li
+              border 1px solid #ccc
+              margin-right 5px
+              border-radius 4px
 </style>

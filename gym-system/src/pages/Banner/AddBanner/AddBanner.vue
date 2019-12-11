@@ -123,7 +123,6 @@ export default {
       line-height 2
   .detail-main
     width 1280px
-    height 700px
     margin 0 auto
     .addBanner-header
       box-sizing border-box

@@ -8,10 +8,11 @@ export default {
   name: 'App'
 }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
 #app
   width 100%
   height 100%
   background-color #ddd
+  overflow hidden
 </style>
 

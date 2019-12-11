@@ -12,28 +12,20 @@ export default [
   },
   {
     path: "/coach",
-    component: Coach,
-    children: [
-      {
-        path: "/coach/detail",
-        component: CoachDetail
-      }
-    ]
+    component: Coach
+  },
+  {
+    path: "/coach/detail",
+    component: CoachDetail
   },
   {
     path: "/banner",
-    component: Banner,
-    children: [
-      {
-        path: "/banner/add",
-        component: AddBanner
-      }
-    ]
+    component: Banner
   },
-  // {
-  //   path: "/coach/detail",
-  //   component: CoachDetail
-  // },
+  {
+    path: "/banner/add",
+    component: AddBanner
+  },
   {
     path: '/',
     redirect: '/coach'
