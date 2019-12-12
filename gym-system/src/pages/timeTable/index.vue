@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <Header/>
+    <Split :name="$router.history.current.meta"/>
     <div class="content">
       <header class="title">
         <span class="title-left">课程表</span>
@@ -142,6 +144,9 @@ export default {
   width 100%
   height 100%
   // background-color rgba(0, 0, 255, .08)
+  display flex
+  justify-content center
+  flex-wrap wrap
   .content
     width 100%
     height 90%

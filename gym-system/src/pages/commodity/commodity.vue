@@ -29,7 +29,8 @@
         <div class="bodyBotTop">
           <span>商品名称：</span>
           <el-input placeholder="请输入商品名称"
-                    v-model="input"></el-input>
+                    v-model="input"
+                    @input='ccc'></el-input>
         </div>
         <el-col :offset="2"
                 :span="1">
@@ -40,44 +41,32 @@
       <div class="bodyBottomShop">
         <el-table :data="tableData"
                   style="width: 100%">
-          <el-table-column prop="id"
-                           label="商品id"
-                           width="130">
-          </el-table-column>
           <el-table-column prop="name"
-                           label="名称"
-                           width="130">
+                           label="商品id"
+                           width="256">
           </el-table-column>
           <el-table-column prop="type"
+                           label="名称"
+                           width="256">
+          </el-table-column>
+          <el-table-column prop="price"
                            label="类型"
-                           width="130">
+                           width="256">
           </el-table-column>
-          <el-table-column prop="money"
+          <el-table-column prop="points"
                            label="金额"
-                           width="130">
-          </el-table-column>
-          <el-table-column prop="integral"
-                           label="积分"
-                           width="130">
-          </el-table-column>
-          <el-table-column prop="sort"
-                           label="排序"
-                           width="130">
-          </el-table-column>
-          <el-table-column prop="sold"
-                           label="已售"
-                           width="130">
+                           width="256">
           </el-table-column>
           <el-table-column label="操作"
-                           width="240">
+                           width="256">
             <template slot-scope="scope">
               <el-breadcrumb separator="|">
                 <el-breadcrumb-item>
                   <el-button type="text"
-                             @click="goMerchandise(scope.$index)">编辑</el-button>
+                             @click="goMerchandise(scope.$index,scope.row)">编辑</el-button>
                 </el-breadcrumb-item>
                 <el-breadcrumb-item>
-                  <el-button @click.native.prevent="deleteRow(scope.$index, tableData)"
+                  <el-button @click.native.prevent="deleteRow(scope.$index)"
                              type="text">
                     删除
                   </el-button>
@@ -113,25 +102,7 @@
         </div>
         <div>金额
           <el-input placeholder="金额"
-                    v-model="inputTian.point"
-                    clearable>
-          </el-input>
-        </div>
-        <div>积分
-          <el-input placeholder="积分"
-                    v-model="inputTian.integral"
-                    clearable>
-          </el-input>
-        </div>
-        <div>排序
-          <el-input placeholder="排序"
-                    v-model="inputTian.sort"
-                    clearable>
-          </el-input>
-        </div>
-        <div>已售
-          <el-input placeholder="已售"
-                    v-model="inputTian.sold"
+                    v-model="inputTian.points"
                     clearable>
           </el-input>
         </div>
@@ -146,8 +117,8 @@
   </div>
 </template>
 <script>
+import { reqGetGoods } from "../../api"
 import { mapState } from 'vuex'
-import { reqAddGoods,reqGetGoods } from '../../api';
 export default {
   name: 'commodity',
   data () {
@@ -160,64 +131,65 @@ export default {
         name: null,
         type: '',
         price: '',
-        point: 0,
-        integral: 0,
-        sort: 0,
-        sold: 0
+        points: 0
       },
       tableData: [],
     }
   },
-  // computed: {
-  //   ...mapState({
-  //     goods: state => state.goods.goods
-  //   })
-  // },
+  computed: {
+    ...mapState({
+      good: state => state.goods.good
+    })
+  },
   methods: {
     goPage () {
       this.$router.back()
     },
-    deleteRow (index, rows) {
-      rows.splice(index, 1);
+    async deleteRow (index) {
+      const id = this.good[index]._id
+      await this.$store.dispatch('deletegoods', id)
+      this.tableData = this.good
     },
     goShop () {
       let input = this.input
-      this.tableData = []
-      this.goods.forEach((item) => {
+      this.tableData.forEach((item) => {
         if (!input) {
-          this.tableData = this.goods
+          this.tableData = this.good
         } else {
           if (item.name.startsWith(input)) {
+            this.tableData = []
             this.tableData.push(item)
           }
         }
       })
     },
+    //添加
     async Tianjia () {
-      // this.centerDialogVisible = false
-      // const { name, type, price, point } = this.inputTian
-      // this.$store.dispatch('addgoods', { name, type, price, point })
-      const { name, type, price, point:points } = this.inputTian
-      console.log(name, type, price, points)
-      const result = await reqAddGoods({ name, type, price, points })
-      console.log(result)
+      this.centerDialogVisible = false
+      const { name, type, price, points } = this.inputTian
+      await this.$store.dispatch('addgoods', { name, type, price, points })
+      this.tableData = this.good
     },
-    goMerchandise (index) {
-      const rows = JSON.stringify(this.tableData1)
-      this.$router.push({ path: '/home/merchandise', query: { rows, index } })
+    goMerchandise (index, row) {
+      this.$router.push({ path: '/merchandise', query: { index, row: row.name } })
+    },
+    ccc () {
+      this.tableData = this.good
     }
   },
   async mounted () {
-    this.$store.dispatch('getggoods')
-    this.tableData = this.goods
+    this.$store.dispatch('getgood')
     const result = await reqGetGoods()
-    console.log(result)
+    if (result.data.status === 0) {
+      if (result.data.data) {
+        this.tableData = result.data.data
+      }
+    }
   }
 }
 </script>
-<style  lang="stylus" rel="stylesheet/stylus">
-body
-  background-color #ccc
+<style  lang="stylus" rel="stylesheet/stylus" scoped>
+
 #boxBodyBooton
   line-height 2
 .body

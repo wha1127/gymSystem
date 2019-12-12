@@ -37,47 +37,50 @@
               </el-form-item>
               <el-form-item label="性别:" prop="gender">
                 <el-select v-model="ruleForm.gender" placeholder="性别">
-                  <el-option label="男" value="man"></el-option>
-                  <el-option label="女" value="women"></el-option>
+                  <el-option label="男" value="男"></el-option>
+                  <el-option label="女" value="女"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="星级:" prop="star">
                 <el-select v-model="ruleForm.star" placeholder="请选择星级">
-                  <el-option label="1星" value="one-star"></el-option>
-                  <el-option label="2星" value="two-star"></el-option>
+                  <el-option label="1星" value="1星"></el-option>
+                  <el-option label="2星" value="2星"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="级别:" prop="grade">
                 <el-select v-model="ruleForm.grade" placeholder="业余教练">
-                  <el-option label="业余教练" value="amateur"></el-option>
-                  <el-option label="专业教练" value="major"></el-option>
-                  <el-option label="魔鬼教练" value="devil"></el-option>
+                  <el-option label="业余教练" value="业余教练"></el-option>
+                  <el-option label="专业教练" value="专业教练"></el-option>
+                  <el-option label="魔鬼教练" value="魔鬼教练"></el-option>
                 </el-select>
               </el-form-item>
               <el-form-item label="教练排序:" prop="ranking">
                 <el-input v-model="ruleForm.ranking" placeholder="数字越大排位越靠前,数字越小排序越靠后"></el-input>
               </el-form-item>
-              <el-form-item label="上传图片:">
-                <ul>
-                  <li>
-                    <i class="el-icon-circle-plus"></i>
-                    <span>添加教练头像</span>
-                    <span>(第一张图为默认头像)</span>
-                  </li>
-                  <li  @mouseenter="showDel=true" @mouseleave="showDel=false">
-                    <img src="../images/photos/03.jpg" alt='教练头像' />
-                    <a class="delImg" v-show='showDel'>删除</a>
-                  </li>
-                </ul>
+              <el-form-item label="上传图片:" prop="avatar">
+                <el-upload
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  list-type="picture-card"
+                  :on-preview="handlePictureCardPreview"
+                  :on-remove="handleRemove"
+                  :on-success="upload"
+                >
+                  <i class="el-icon-circle-plus" style="color: #06f"></i>
+                  <span>添加图片</span>
+                  <span>图片大小最多3M</span>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                  <img width="100%" :src="dialogImageUrl" alt />
+                </el-dialog>
               </el-form-item>
             </el-form>
           </div>
         </el-card>
       </div>
       <div class="detail-introduce">
-        <el-form>
-          <el-form-item label="个人简介:" prop="dec1">
-            <el-input type="textarea" v-model="ruleForm.dec1"></el-input>
+        <el-form :model="ruleForm" :rules="rules">
+          <el-form-item label="会员种类:" prop="desc1">
+            <el-input type="textarea" v-model="ruleForm.desc1"></el-input>
           </el-form-item>
           <el-form-item label="训练介绍:" prop="desc2">
             <el-input type="textarea" v-model="ruleForm.desc2"></el-input>
@@ -85,24 +88,26 @@
         </el-form>
       </div>
       <div class="detail-foot">
-        <el-button type="mini" class="detailFoot" @click="addCoach">保存</el-button>
+        <el-button type="mini" :plain="true" class="detailFoot" @click.prevent="onSubmit(ruleForm)">保存</el-button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import {reqAddCoach} from '../../../api'
+import { mapActions } from 'vuex'
 export default {
   name: 'CoachDetail',
-  props:['isShowDetail'],
   data() {
     return {
+      dialogImageUrl: '',
+      dialogVisible: false,
       showDel: false,
       ruleForm: {
         name: '',
         star: '',
         gender: '',
         grade: '',
+        avatar: '',
         ranking: '',
         desc1: '',
         desc2: ''
@@ -112,30 +117,79 @@ export default {
           { required: true, message: '请输入教练姓名', trigger: 'blur' },
           { min: 2, max: 5, message: '长度在 2 到 5 个字符', trigger: 'blur' }
         ],
-        star: [{ required: true, message: '请选择性别', trigger: 'change' }],
-        gender: [{ required: true, message: '请选择星级', trigger: 'change' }],
+        gender: [{ required: true, message: '请选择性别', trigger: 'change' }],
+        star: [{ required: true, message: '请选择星级', trigger: 'change' }],
         grade: [{ required: true, message: '请选择级别', trigger: 'change' }],
         ranking: [
-          { required: true, message: '请选择教练排序', trigger: 'blur' }
+          { required: true, message: '请选择教练排序', trigger: 'blur' },
+          { min: 1, max: 20, message: '长度在 1 到 5 个字符', trigger: 'blur' }
         ],
-        desc1: [{ required: true, message: '请填写活动形式', trigger: 'blur' }],
-        desc2: [{ required: true, message: '请填写活动形式', trigger: 'blur' }]
+        desc1: [
+          { required: true, message: '请填写活动形式', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+        ],
+        desc2: [
+          { required: true, message: '请填写活动形式', trigger: 'blur' },
+          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+        ]
       }
     }
   },
   methods: {
-    gabackCoach(){
+    ...mapActions(['addCoach']),
+    gabackCoach() {
       this.$router.back()
-      this.isShowDetail()
     },
-    async addCoach(){
-      const {name,star,gender,grade:rank,ranking:memberSort,avatar} = this.ruleForm
-      console.log(name,star,gender,rank,memberSort,avatar)
-      const result = await reqAddCoach({name,star,gender,rank,memberSort,avatar})
-      console.log(result)
+    handleRemove(file, fileList) {
+      console.log(file, fileList)
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url
+      this.dialogVisible = true
+      // console.log(file)
+    },
+    upload(response, file, fileList) {
+      // console.log(response, file, fileList)
+      this.ruleForm.avatar = file.url
+    },
+    onSubmit(ruleForm) {
+      console.log(this.$refs.ruleForm)
+      this.$refs.ruleForm.validate(valid => {
+        if (valid) {
+          const {
+            name,
+            desc1: memberCount,
+            grade: rank,
+            ranking: sort,
+            gender,
+            star,
+            avatar
+          } = this.ruleForm
+          const coach = { name, avatar, memberCount, rank, sort, gender, star }
+          // console.log(coach)
+          const result = this.addCoach(coach)
+          console.log('提交成功!')
+          // this.ruleForm.name = ''
+          // this.rueForm.star = ''
+          // this.rueForm.gender = ''
+          // this.rueForm.grade = ''
+          // this.rueForm.avatar = ''
+          // this.rueForm.ranking = ''
+          // this.rueForm.desc1 = ''
+          // this.rueForm.desc2 = ''
+          this.$router.push('/coach')
+          this.$message({
+          message: '恭喜你，添加成功~',
+          type: 'success'
+        })
+        } else {
+          console.log('error submit!!')
+          this.$message.error('错了哦，添加失败!')
+          return false
+        }
+      })
     }
-  },
-  
+  }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -149,7 +203,6 @@ export default {
       line-height 2
   .detail-main
     width 1280px
-    height 700px
     margin 0 auto
     .coach-header
       box-sizing border-box
@@ -191,46 +244,13 @@ export default {
                     width 300px
               &:nth-child(6)
                 .el-form-item__content
-                  ul
+                  width 200px
+                  height 122px
+                  .el-upload
                     display flex
-                    li 
-                      box-sizing border-box
-                      width 200px
-                      height 122px
-                      display flex
-                      flex-direction column
-                      justify-content center
-                      align-items center
-                      margin-right 40px
-                      position relative
-                      &:nth-child(1)
-                        width 200px
-                        background-color #eee
-                        border 1px dashed #ccc
-                        border-radius 3px
-                      i
-                        padding-top 15px
-                        padding-bottom 5px
-                        font-size 30px
-                        color #08f
-                      span
-                        height 24px
-                        line-height 24px
-                      img
-                        width 200px
-                        height 122px
-                        vertical-align middle
-                        border-radius 3px
-                      .delImg
-                        position absolute
-                        bottom 0
-                        width 100%
-                        height 30px
-                        line-height 30px
-                        color #fff
-                        background-color rgba(0,0,0,0.3)
-                        text-align center
-                        cursor pointer
+                    flex-direction column
+                    line-height 2
+                    justify-content center
     .detail-introduce
       background-color #fff
       margin-top 20px

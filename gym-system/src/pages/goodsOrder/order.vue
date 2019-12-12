@@ -105,7 +105,7 @@ export default {
       rows.splice(index, 1);
     },
     goDetail () {
-      this.$router.push('/home/detail')
+      this.$router.push('/detail')
     },
     goID () {
       let inputid = this.inputid * 1
@@ -126,9 +126,8 @@ export default {
   }
 }
 </script>
-<style  lang="stylus" rel="stylesheet/stylus">
-body
-  background-color #ccc
+<style  lang="stylus" rel="stylesheet/stylus" scoped>
+
 #boxBodyBooton
   line-height 2
 .body

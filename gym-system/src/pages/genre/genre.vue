@@ -163,9 +163,8 @@ export default {
   }
 }
 </script>
-<style  lang="stylus" rel="stylesheet/stylus">
-body
-  background-color #ccc
+<style  lang="stylus" rel="stylesheet/stylus" scoped>
+
 #boxBodyBooton
   line-height 2
 .body

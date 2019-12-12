@@ -25,10 +25,16 @@ import EditingCourse from '../pages/courseManagement/editingCourse'
 //编辑班级 三级路由
 import RedactClass from '../pages/courseManagement/classList/redactClass'
 import GymEdit from '../pages/Gym/GymEdit/GymEdit.vue'
+import Admission from '../pages/Admission/Admission.vue'
+import Member from '../pages/Member/Member.vue'
+import Bianji from '../pages/Member/Bianji/Bianji.vue'
+import Person from '../pages/Person/Person.vue'
+import List from '../pages/List/List.vue'
+import MemberList from '../pages/List/Member/Member.vue'
 export default [
   {
     path:"/login",
-    component:Login
+    component:Login,
   },
   {
     path:"/home",
@@ -36,11 +42,12 @@ export default [
   },
   {
     path:"/worker",
-    component:Worker
+    component:Worker,
   },
   {
     path:"/gym",
-    component:Gym
+    component:Gym,
+    meta:'场馆管理'
   },
   {
     path: "/order",
@@ -63,6 +70,7 @@ export default [
   {
     path: "/banner",
     component: Banner,
+    meta:'banner管理',
     children: [
       {
         path: "/banner/add",
@@ -72,12 +80,14 @@ export default [
   },
   {
     path: '/activity',
-    component: Activity
+    component: Activity,
+    meta:'活动编辑'
   },
 
   {
     path: '/courseManagement',
-    component: CourseManagement
+    component: CourseManagement,
+    meta:'课程管理'
   },
   {
     path: '/redactClass',
@@ -93,7 +103,8 @@ export default [
   },
   {
     path: '/timeTable',
-    component: TimeTable
+    component: TimeTable,
+    meta:'课程表'
   },
   {
     //商品管理
@@ -118,6 +129,32 @@ export default [
   {
     path: '/genre',
     component: Genre
+  },
+  {
+    path: '/Admission',
+    component: Admission,
+    meta:'入场管理'
+  },
+  {
+    path: '/Member',
+    component: Member,
+    meta:'会员卡管理'
+  },
+  {
+    path: '/Bianji',
+    component: Bianji
+  },
+  {
+    path:'/person',
+    component:Person
+  },
+  {
+    path:'/list',
+    component:List
+  },
+  {
+    path:'/memberlist',
+    component:MemberList
   },
   {
     path:"/",

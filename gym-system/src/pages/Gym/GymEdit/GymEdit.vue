@@ -7,22 +7,37 @@
         <p>上传场馆图</p>
       </div>
       <div class="GymEditContentMain">
-        <el-table :data="tableData"
-                  height="250"
-                  border
-                  style="width: 100%">
-          <el-table-column prop="date"
-                           label="日期"
-                           width="180">
-          </el-table-column>
-          <el-table-column prop="name"
-                           label="姓名"
-                           width="180">
-          </el-table-column>
-          <el-table-column prop="address"
-                           label="地址">
-          </el-table-column>
-        </el-table>
+        <el-card class="box-card">
+          <div slot="header"
+               class="clearfix">
+            <span>场馆信息</span>
+            </div>
+            <el-form label-width="80px"
+                     label-position="left">
+              <el-form-item label="图片标题:">
+                <el-input></el-input>
+              </el-form-item>
+              <el-form-item label="排序:">
+                <el-input></el-input>
+              </el-form-item>
+              <el-form-item label="上传图片:">
+                <el-upload class="avatar-uploader"
+                         action="https://jsonplaceholder.typicode.com/posts/"
+                         :show-file-list="false"
+                         :on-success="handleAvatarSuccess"
+                         :before-upload="beforeAvatarUpload">
+                <img v-if="imageUrl"
+                     :src="imageUrl"
+                     class="avatar">
+                <i v-else
+                   class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>
+              </el-form-item>
+              
+            </el-form>
+          
+
+        </el-card>
       </div>
     </div>
   </div>
@@ -30,47 +45,36 @@
 
 <script>
 export default {
-  name:"GymEdit",
-  data() {
-      return {
-        tableData: [{
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
+  name: "GymEdit",
+  data () {
+    return {
+      imageUrl: ''
+    };
+  },
+  methods: {
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    beforeAvatarUpload (file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
       }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
     }
+  }
 }
 </script>
 
 <style lang="stylus" scoped>
 .GymEditContainer
   width 100%
-  height 100% 
+  height 100%
   display flex
   flex-wrap wrap
   justify-content center
@@ -82,12 +86,38 @@ export default {
     flex-direction column
     flex-wrap wrap
     justify-content space-around
-    background-color rgb(240,242,245)
+    background-color rgb(240, 242, 245)
     .GymEditContentTop
       width 1280px
-    .GymEditContentContent
-      width 1280px
-      height 100%
+      p
+        font-size 22px
+        font-weight bold
+        margin-left 100px
+        position relative
+        &:before
+          position absolute
+          content ''
+          height 25px
+          left -20px
+          border-left 4px solid rgb(28,108,230)
+    .GymEditContentMain
+      width 1440px
       display flex
       justify-content center
+      .box-card
+        width 1280px
+        .avatar-uploader
+          border 1px dashed #d9d9d9
+          border-radius 6px
+          cursor pointer
+          position relative
+          display block
+          width 178px
+          .avatar-uploader-icon
+            font-size 28px
+            color #8c939d
+            width 178px
+            height 178px
+            line-height 178px
+            text-align center
 </style>

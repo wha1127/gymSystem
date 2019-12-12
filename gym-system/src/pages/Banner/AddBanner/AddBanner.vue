@@ -43,13 +43,26 @@
                   :on-preview="handlePictureCardPreview"
                   :on-remove="handleRemove"
                 >
-                  <i class="el-icon-circle-plus" style='color: #06f'></i>
+                  <i class="el-icon-circle-plus" style="color: #06f"></i>
                   <span>添加图片</span>
                   <span>图片大小最多3M</span>
                 </el-upload>
                 <el-dialog :visible.sync="dialogVisible">
                   <img width="100%" :src="dialogImageUrl" alt />
                 </el-dialog>
+              </el-form-item>
+              <el-form-item label="链接地址:" prop="adress">
+                <el-input v-model="ruleForm.adress" placeholder="请输入http://开头的地址"></el-input>
+                <div>
+                  <i class="el-icon-warning-outline" style="color:red"></i>
+                  <span>需要在微信小程序管理后台添加业务域名才可以访问这个链接</span>
+                </div>
+              </el-form-item>
+              <el-form-item label="上架状态:" prop="state">
+                <el-select v-model="ruleForm.state" placeholder="上架">
+                  <el-option label="上架" value="upup"></el-option>
+                  <el-option label="下架" value="downDown"></el-option>
+                </el-select>
               </el-form-item>
             </el-form>
           </div>
@@ -70,7 +83,9 @@ export default {
       dialogImageUrl: '',
       dialogVisible: false,
       ruleForm: {
-        ranking: ''
+        ranking: '',
+        adress: '',
+        state: ''
       },
       rules: {
         ranking: [
@@ -97,7 +112,7 @@ export default {
   }
 }
 </script>
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
 .addBanner-detail
   width 100%
   height 100%
@@ -108,7 +123,6 @@ export default {
       line-height 2
   .detail-main
     width 1280px
-    height 700px
     margin 0 auto
     .addBanner-header
       box-sizing border-box

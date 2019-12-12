@@ -1,8 +1,9 @@
-import {RECEIVE_TOKEN,RECEIVE_USER} from '../mutaiton-type'
-import {reqAutoLogin} from '../../api'
+import {RECEIVE_TOKEN,RECEIVE_USER,RECEIVE_STAFF} from '../mutation-type'
+import {reqAutoLogin,reqRoleList} from '../../api'
 const state = {
   token: localStorage.getItem('token_key'),
-  user: {}
+  user: {},
+  staff:[]
 }
 
 const mutations = {
@@ -11,6 +12,9 @@ const mutations = {
   },
   [RECEIVE_TOKEN](state,token){
     state.token = token
+  },
+  [RECEIVE_STAFF](state,staff){
+    state.staff = staff
   }
 }
 
@@ -30,10 +34,25 @@ const actions = {
         commit(RECEIVE_USER, user)
       }
     }
+  },
+  async saveStaff({commit}){
+    const result = await reqRoleList()
+    console.log(result)
+    if(result.data.status === 0){
+      const staff = result.data.data
+      commit(RECEIVE_STAFF,staff)
+    }
   }
 } 
 
-const getters = {}
+const getters = {
+  menus(){
+    return state.staff.map(item => {
+      item.menus = item.menus+','
+      return item
+    })
+  }
+}
 
 export default {
   mutations,

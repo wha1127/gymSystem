@@ -25,13 +25,18 @@
       <el-form ref="form"
                :model="rows"
                label-width="100px">
-        <el-form-item label="商品名称："
+        <el-form-item label="商品id："
                       style="width:330px">
           <el-input v-model="rows.name"
+                    placeholder="请输入商品id(1-12个字符)"></el-input>
+        </el-form-item>
+        <el-form-item label="商品名称："
+                      style="width:330px">
+          <el-input v-model="rows.type"
                     placeholder="请输入商品名称(1-12个字符)"></el-input>
         </el-form-item>
         <el-form-item label="商品类型：">
-          <el-select v-model="rows.type"
+          <el-select v-model="rows.price"
                      placeholder="电子">
             <el-option label="电子"
                        value="电子"></el-option>
@@ -41,12 +46,7 @@
         </el-form-item>
         <el-form-item label="金额："
                       style="width:330px">
-          <el-input v-model="rows.money"
-                    placeholder="请输入正整数"></el-input>
-        </el-form-item>
-        <el-form-item label="积分："
-                      style="width:330px">
-          <el-input v-model="rows.integral"
+          <el-input v-model="rows.points"
                     placeholder="请输入正整数"></el-input>
         </el-form-item>
       </el-form>
@@ -74,6 +74,8 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+import { type } from 'os';
 export default {
   name: 'commodity',
   data () {
@@ -81,13 +83,18 @@ export default {
       rows: {
         name: '',
         type: '',
-        money: '',
-        integral: '',
+        price: '',
+        points: 0,
+        id: 0
       },
-      index: 0,
       dialogImageUrl: '',
       dialogVisible: false
     }
+  },
+  computed: {
+    ...mapState({
+      good: state => state.goods.good
+    })
   },
   methods: {
     goPage () {
@@ -101,16 +108,17 @@ export default {
       this.dialogVisible = true;
     },
     goCommodity () {
-      const rows = JSON.stringify(this.rows)
-      const index = this.index
-      this.$router.push({ path: '/home/commodity', query: { rows, index } })
+      this.$router.back()
+      const { _id, type, price, name, points } = this.rows
+      this.$store.dispatch('updategoods', { _id, type, price, name, points })
     }
   },
-  mounted () {
+  async mounted () {
+    this.$store.dispatch('getgood')
     const index = this.$route.query.index
-    const rows = JSON.parse(this.$route.query.rows)[index]
-    this.rows = rows
-    this.index = index * 1
+    this.rows = this.good[index]
+    this.rows.name = this.$route.query.row
+    this.rows.id = this.rows._id
   }
 }
 </script>

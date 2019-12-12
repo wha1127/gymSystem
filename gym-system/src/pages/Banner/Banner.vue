@@ -2,21 +2,7 @@
   <div>
     <div class="banner-outer" v-if="isShow">
       <Header/>
-      <div class="main-header">
-        <el-card class="box-card">
-          <el-row :gutter="20">
-            <el-col :offset="2" :span="1">
-              <el-button size="mini" @click="$router.back()">返回</el-button>
-            </el-col>
-            <el-col :span="10" :offset="1">
-              <el-breadcrumb separator="/" id="boxBodyBooton">
-                <el-breadcrumb-item :to="{path:'/'}">功能面板</el-breadcrumb-item>
-                <el-breadcrumb-item>banner图列表</el-breadcrumb-item>
-              </el-breadcrumb>
-            </el-col>
-          </el-row>
-        </el-card>
-      </div>
+      <Split :name="$router.history.current.meta"/>
       <div class="bannerContainer">
         <div class="banner-header">
           <p class="header-left">banner图列表</p>
@@ -26,7 +12,7 @@
           <el-table :data="tableData" style="width: 100%">
             <el-table-column prop="bannerSort" label="排序" width="200"></el-table-column>
             <el-table-column prop="bannerAvatar" label="banner图片" width="300">
-              <img class="bannerAvatar" src="./images/avatar/01.jpg" alt />
+              <img class="bannerAvatar" src="../../utils/images/avatar/01.jpg" alt />
             </el-table-column>
             <el-table-column prop="bannerUrl" label="跳转链接" width="300">
               <template slot-scope="scope">
@@ -114,17 +100,15 @@ export default {
 .banner-outer
   width 100%
   height 100%
-  overflow scroll
   display flex
   justify-content center
   flex-wrap wrap
   .main-header
-    width 1440px
+    width 100%
     .el-breadcrumb
       line-height 2
   .bannerContainer
     width 1280px
-    height 700px
     margin 0 auto
     .banner-header
       width 100%

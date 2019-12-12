@@ -5,7 +5,7 @@ const rolesSchema = new mongoose.Schema({
   name:String, // 角色名称
   phone:String, // 手机号
   pwd:String, // 密码
-  status: Boolean, // 创建状态
+  status: String, // 创建状态
   menus: {type: []} // 所有有权限操作的菜单path的数组
 });
 

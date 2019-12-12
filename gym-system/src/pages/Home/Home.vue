@@ -12,26 +12,34 @@
             <img src="./images/xitong.png" alt="">
             <p>系统设置</p>
           </li>
-          <li>
+          <router-link to="person">
+            <li>
             <img src="./images/jiaolian 拷贝 2.png" alt="">
             <p>工作人员</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/list">
+            <li>
             <img src="./images/形状 1.png" alt="">
             <p>会员管理</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/Admission">
+            <li>
             <img src="./images/形状 14.png" alt="">
             <p>入场管理</p>
           </li>
+          </router-link>
           <li>
             <img src="./images/形状 3.png" alt="">
             <p>仪表盘</p>
           </li>
-          <li>
+          <router-link to="/Member">
+            <li>
             <img src="./images/形状 4.png" alt="">
             <p>会员卡管理</p>
           </li>
+          </router-link>
         </ul>
       </el-card>
       <el-card class="box-card">
@@ -90,18 +98,24 @@
           <span class="title">商场管理</span>
         </div>
         <ul class="manange">
-          <li>
+          <router-link to="/commodity">
+            <li>
             <img src="./images/形状 10.png" alt="">
-            <p>系统设置</p>
+            <p>商品管理</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/goodsorder">
+            <li>
             <img src="./images/形状 11.png" alt="">
-            <p>工作人员</p>
+            <p>订单管理</p>
           </li>
-          <li>
+          </router-link>
+          <router-link to="/genre">
+            <li>
             <img src="./images/形状 12.png" alt="">
-            <p>会员管理</p>
+            <p>类型管理</p>
           </li>
+          </router-link>
         </ul>
       </el-card>
     </div>

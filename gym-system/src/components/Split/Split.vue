@@ -1,15 +1,16 @@
 <template>
   <div class="splitContainer">
     <el-button class="return" @click="$router.back()">返回</el-button>
-    <span class="blue">功能面板</span>
+    <a href=""><span class="blue" @click="$router.replace('/home')">功能面板</span></a>
     <span class="split">/</span>
-    <span>banner图列表</span>
+    <span>{{name}}</span>
   </div>
 </template>
 
 <script>
 export default {
   name:"Split",
+  props:['name'],
   mounted() {
     console.log(this.$router)
   },
