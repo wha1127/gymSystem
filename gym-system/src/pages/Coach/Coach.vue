@@ -115,6 +115,7 @@ export default {
     }
   },
   watch: {
+    //监视name状态数据,一旦input框值清空,重新获取教练信息
     name() {
       if (this.name === '') {
         return this.getCoaches()
@@ -129,6 +130,7 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`)
     },
+    //跳转到添加教练信息
     goDetail() {
       this.isShowDetail()
       this.$router.push('/coach/detail')
@@ -136,10 +138,12 @@ export default {
     isShowDetail() {
       this.isShow = !this.isShow
     },
+    //点击删除教练信息
     deleteCoach(index) {
       this.coaches.splice(index, 1)
       this.$store.commit('delete_coach', this.coaches)
     },
+    //点击搜索教练
     searchCoach() {
       const searchName = this.name
       console.log(searchName)

@@ -1,7 +1,8 @@
-import { RECEIVE_COACHES, ADD_COACH, UPDATE_COACH, DELETE_COACH ,SEARCH_COACH} from '../mutation-type'
-import { reqCoach, reqAddCoach, reqDeleteCoach } from '../../api'
+import { RECEIVE_COACHES, ADD_COACH, UPDATE_COACH, DELETE_COACH, SEARCH_COACH ,UPDATE_ID} from '../mutation-type'
+import { reqCoach, reqAddCoach, reqDeleteCoach, reqUpdateCoach } from '../../api'
 const state = {
-  coaches: []
+  coaches: [],
+  id: null
 }
 
 const mutations = {
@@ -14,11 +15,25 @@ const mutations = {
   [UPDATE_COACH] (state, coach) {
     state.coach = coach
   },
-  [DELETE_COACH] (state, coaches) {
+  [DELETE_COACH] (state, id) {
+    const coaches = state.coaches.filter(item => (item._id !== id))
     state.coaches = coaches
   },
+  // [DELETE_COACH] (state, id) {
+  //   const newCoaches =[]
+  //   state.coaches.forEach(item => {
+  //     if(item._id !== id){
+  //       newCoaches.push(item)
+  //     }
+  //   })
+  //   state.coaches = newCoaches
+  // },
   [SEARCH_COACH] (state, coaches) {
     state.coaches = coaches
+  },
+
+  [UPDATE_ID](state,id){
+    state.id = id
   }
 }
 
@@ -36,7 +51,7 @@ const actions = {
   },
 
   //添加教练信息
-  async addCoach ({ commit },coach) {
+  async addCoach ({ commit }, coach) {
     const result = await reqAddCoach(coach)
     // console.log(result)
     if (result.data.status === 0) {
@@ -49,14 +64,28 @@ const actions = {
   },
 
   //删除教练信息
-  async delCoach ({commit},name) {
-    const result = await reqDeleteCoach(name)
+  async delCoach ({ commit }, id) {
+    const result = await reqDeleteCoach(id)
     console.log(result)
-    if(result.data.status === 0){
-      console.log("删除成功")
+    if (result.data.status === 0) {
+      console.log(result.data)
+      commit(DELETE_COACH, id)
+    }
+  },
+  //更新教练信息
+  async updateCoach ({ commit }, coach) {
+    const result = await reqUpdateCoach(coach)
+    if (result.data.status === 0) {
+      console.log("更新成功")
+      console.log(result.data.data)
+    } else {
+      console.log("数据更新失败")
     }
   }
+
 }
+
+
 
 const getters = {}
 

@@ -3,7 +3,7 @@
     <el-button class="return">返回</el-button>
     <span class="blue">功能面板</span>
     <span class="split">/</span>
-    <span>banner图列表</span>
+    <span>{{$route.meta[0]}}</span>
   </div>
 </template>
 

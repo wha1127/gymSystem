@@ -8,23 +8,38 @@ import CoachDetail from '../pages/Coach/CoachDetail/CoachDetail.vue'
 export default [
   {
     path: "/order",
-    component: Order
+    component: Order,
+    meta:[
+      '预约管理'
+    ]
   },
   {
     path: "/coach",
-    component: Coach
+    component: Coach,
+    meta:[
+      '预约管理'
+    ]
   },
   {
     path: "/coach/detail",
-    component: CoachDetail
+    component: CoachDetail,
+    meta:[
+      '预约管理'
+    ]
   },
   {
     path: "/banner",
-    component: Banner
+    component: Banner,
+    meta:[
+      '预约管理'
+    ]
   },
   {
     path: "/banner/add",
-    component: AddBanner
+    component: AddBanner,
+    meta:[
+      '预约管理'
+    ]
   },
   {
     path: '/',

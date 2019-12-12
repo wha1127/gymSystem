@@ -92,6 +92,7 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`)
     },
+    //跳转到添加banner界面
     goDetail() {
       this.isShowDetail()
       this.$router.push('/banner/detail')
@@ -99,9 +100,11 @@ export default {
     isShowDetail() {
       this.isShow = !this.isShow
     },
+    //点击链接跳转
     goNewPage(url) {
       window.open(url)
     },
+    //跳转到添加banner图界面
     addBanner() {
       this.$router.push('/banner/add')
       this.isShowDetail()

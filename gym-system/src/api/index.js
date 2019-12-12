@@ -95,6 +95,28 @@ export const reqDeleteCoach = (_id) => ajax({
   }
 })
 
+export const reqUpdateCoach = ({
+  name,
+  avatar,
+  rank,
+  memberCount,
+  sort,
+  gender,
+  star
+}) => ajax({
+  method: 'POST',
+  url: BASE + '/coach/update',
+  data: {
+    name,
+    avatar,
+    rank,
+    memberCount,
+    sort,
+    gender,
+    star
+  }
+})
+
 export const reqGetStudents = () => ajax({
   method: 'GET',
   url: BASE + '/student/get',
