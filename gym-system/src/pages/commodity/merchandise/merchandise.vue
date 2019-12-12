@@ -27,7 +27,7 @@
                label-width="100px">
         <el-form-item label="商品id："
                       style="width:330px">
-          <el-input v-model="rows.id"
+          <el-input v-model="rows.name"
                     placeholder="请输入商品id(1-12个字符)"></el-input>
         </el-form-item>
         <el-form-item label="商品名称："
@@ -75,15 +75,17 @@
 </template>
 <script>
 import { mapState } from 'vuex'
+import { type } from 'os';
 export default {
   name: 'commodity',
   data () {
     return {
       rows: {
-        id: 0,
+        name: '',
         type: '',
         price: '',
-        points: 0
+        points: 0,
+        id: 0
       },
       dialogImageUrl: '',
       dialogVisible: false
@@ -107,12 +109,16 @@ export default {
     },
     goCommodity () {
       this.$router.back()
+      const { _id, type, price, name, points } = this.rows
+      this.$store.dispatch('updategoods', { _id, type, price, name, points })
     }
   },
   async mounted () {
     this.$store.dispatch('getgood')
     const index = this.$route.query.index
     this.rows = this.good[index]
+    this.rows.name = this.$route.query.row
+    this.rows.id = this.rows._id
   }
 }
 </script>

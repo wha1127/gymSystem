@@ -1,5 +1,5 @@
-import { reqAddGoods, reqGetGoods, reqDeleteGoods } from "../../api"
-import { ADD_GOODS, GET_GOODS, DELE_GOODS } from "../mutations-type.js"
+import { reqAddGoods, reqGetGoods, reqDeleteGoods, reUpdateGoods } from "../../api"
+import { ADD_GOODS, GET_GOODS, DELE_GOODS, UPDATE_GOODS } from "../mutations-type.js"
 const state = {
   good: []
 }
@@ -21,6 +21,13 @@ const mutations = {
       }
     });
     state.good = good
+  },
+  [UPDATE_GOODS] (state) {
+    // state.good.forEach((item, index) => {
+    //   if (item._id === _id) {
+    //     item[index] = 1
+    //   }
+    // })
   }
 }
 const actions = {
@@ -40,6 +47,14 @@ const actions = {
     const result = await reqDeleteGoods(id)
     if (result.data.status === 0) {
       commit(DELE_GOODS, id)
+    }
+  },
+  async updategoods ({ commit }, { id, type, price, name, points }) {
+    const result = await reUpdateGoods({ id, type, price, name, points })
+    console.log(result.data)
+    if (result.data.status === 0) {
+      console.log(result.data)
+      commit(UPDATE_GOODS)
     }
   }
 }

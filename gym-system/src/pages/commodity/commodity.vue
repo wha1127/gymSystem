@@ -63,7 +63,7 @@
               <el-breadcrumb separator="|">
                 <el-breadcrumb-item>
                   <el-button type="text"
-                             @click="goMerchandise(scope.$index)">编辑</el-button>
+                             @click="goMerchandise(scope.$index,scope.row)">编辑</el-button>
                 </el-breadcrumb-item>
                 <el-breadcrumb-item>
                   <el-button @click.native.prevent="deleteRow(scope.$index)"
@@ -170,8 +170,8 @@ export default {
       await this.$store.dispatch('addgoods', { name, type, price, points })
       this.tableData = this.good
     },
-    goMerchandise (index) {
-      this.$router.push({ path: '/home/merchandise', query: { index } })
+    goMerchandise (index, row) {
+      this.$router.push({ path: '/home/merchandise', query: { index, row: row.name } })
     },
     ccc () {
       this.tableData = this.good
