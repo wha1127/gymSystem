@@ -1,10 +1,11 @@
 <template>
   <div class="coach-detail">
+    <Header style="width:100%"/>
     <div class="main-header">
       <el-card class="box-card">
         <el-row :gutter="20">
           <el-col :offset="2" :span="1">
-            <el-button size="mini" @click="gabackCoach">返回</el-button>
+            <el-button size="mini" @click="gobackCoach">返回</el-button>
           </el-col>
           <el-col :span="10" :offset="1">
             <el-breadcrumb separator="/" id="boxBodyBooton">
@@ -138,7 +139,7 @@ export default {
   methods: {
     ...mapActions(['addCoach']),
     //返回coach界面
-    gabackCoach() {
+    gobackCoach() {
       this.$router.back()
     },
     //图片上传功能

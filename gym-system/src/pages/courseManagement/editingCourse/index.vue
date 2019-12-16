@@ -254,6 +254,7 @@ export default {
         introduce,
         influence,
         attention } = this.ruleForm
+        console.log(title,price)
       this.$store.dispatch('addClass',
         {          title,
           price,

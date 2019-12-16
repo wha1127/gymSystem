@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <Header style="width:100%"/>
+    <Split :name="$router.history.current.meta" style="width:100%"/>
     <div class="content">
       <header class="title">
         <span class="title-left">课程表</span>

@@ -1,5 +1,7 @@
 <template>
   <div class="container-list">
+    <Header/>
+    <Split :name="$router.history.current.meta" style="width:100%"/>
     <div class="container-one">
       <div class="content">
         <!-- 课程头部 -->
@@ -100,7 +102,7 @@ export default {
   },
   async mounted () {
     await this.$store.dispatch('getClass')
-
+  console.log(this.classes)
     this.$nextTick(() => {
       this.newClasses = this.classes
     })
@@ -161,6 +163,8 @@ export default {
   width 100%
   height 100%
   background-color rgba(0, 0, 255, .08)
+  .header
+    width 100%
   .container-one
     width 100%
     height 100%
@@ -200,4 +204,5 @@ export default {
           margin 10px
         .cell
           text-align center
+          display:flex
 </style>

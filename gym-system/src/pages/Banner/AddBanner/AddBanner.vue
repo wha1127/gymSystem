@@ -1,5 +1,6 @@
 <template>
   <div class="addBanner-detail">
+    <Header style="width:100%"/>
     <div class="main-header">
       <el-card class="box-card">
         <el-row :gutter="20">

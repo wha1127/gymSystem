@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header/>
     <el-card class="box-card">
       <el-row :gutter="20">
         <el-col :offset="2"
@@ -156,6 +157,8 @@ body
   background-color #ccc
 #boxBodyBooton
   line-height 3
+.header
+  width 100%
 .person-title
   width 1280px
   height 80px

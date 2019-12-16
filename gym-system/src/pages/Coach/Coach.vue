@@ -1,6 +1,6 @@
 <template>
   <div class="coach-outer">
-    <Header />
+    <Header style="width:100%"/>
     <div class="coach-main" v-if="isShow">
       <div class="main-header">
         <el-card class="box-card">

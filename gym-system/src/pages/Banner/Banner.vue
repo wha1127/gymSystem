@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="banner-outer" v-if="isShow">
+      <Header style="width:100%"/>
       <div class="main-header">
         <el-card class="box-card">
           <el-row :gutter="20">

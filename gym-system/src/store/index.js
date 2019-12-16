@@ -4,6 +4,7 @@ import user from './modules/user'
 import goods from './modules/goods'
 import coach from './modules/coach'
 import order from './modules/order'
+import classItem from './modules/classItem'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -11,6 +12,7 @@ export default new Vuex.Store({
     user,
     goods,
     coach,
-    order
+    order,
+    classItem
   }
 })

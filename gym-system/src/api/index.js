@@ -102,6 +102,13 @@ export const reqGetStudents = () => ajax({
 
   }
 })
+export const reqCourse = () =>ajax({
+  method:'GET',
+  url:BASE+'/course/get',
+  data:{
+
+  }
+})
 
 export const reqAddCourse = ({
   title,

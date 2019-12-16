@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Header style="width:100%"/>
     <div>
       <el-card class="box-card">
         <el-row :gutter="20">

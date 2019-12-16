@@ -1,6 +1,6 @@
 <template>
   <div class="splitContainer">
-    <el-button class="return" @click="$router.back()">返回</el-button>
+    <el-button class="return" @click="$router.replace('/home')">返回</el-button>
     <a href=""><span class="blue" @click="$router.replace('/home')">功能面板</span></a>
     <span class="split">/</span>
     <span>{{name}}</span>

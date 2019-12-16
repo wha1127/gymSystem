@@ -11,3 +11,10 @@ export const DELETE_COACH= 'delete_coach'
 export const SEARCH_COACH= 'search_Coach'
 export const RECEIVE_ORDERS = 'receive_orders'
 export const RECEIVE_STAFF = 'receive_staff'
+export const GET_CLASS = 'receive_class'
+//更新课程信息
+export const UPDATE_CLASS = 'update_class'
+// 增加课程信息 
+export const ADD_CLASS = 'add_class'
+// 删除课程信息
+export const DELETE_CLASS = 'delete_class'
