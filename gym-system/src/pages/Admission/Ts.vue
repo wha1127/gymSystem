@@ -1,47 +1,39 @@
 <template>
-<!-- 归还手环的弹窗 elementUi对话框组件 --> 
+  <!-- 搜索的弹窗 elementUi对话框组件 -->
   <div>
-    <el-button type="text" @click="centerDialogVisible = true">归还手环</el-button>
+    <el-button type="text" @click="centerDialogVisible = true">搜索</el-button>
 
     <el-dialog :visible.sync="centerDialogVisible" width="30%" center>
-      <img :src="this.$attrs.change.image" style="width:50px,height:50px" alt />
-      <p class="name">{{this.$attrs.change.name}}</p>
-      <p class="phone">{{this.$attrs.change.phone}}</p>
-      <input type="text" v-model='huan' placeholder="请输入手牌编号" />
+      <img src="http://file02.16sucai.com/d/file/2015/0128/8b0f093a8edea9f7e7458406f19098af.jpg" style="width:50px,height:50px" alt />
+      <p class="name">王雨</p>
+      <p class="phone">13099944999</p>
+      <p class="phone">离场</p>
+      <!-- <input type="text"  placeholder="请输入手牌编号" /> -->
       <span slot="footer" class="dialog-footer">
         <!-- <el-button  @click="fang">确认归还</el-button> -->
-        <el-button type="primary" @click="fang">归还并离场</el-button>
+        <el-button type="primary" @click="fang">确定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 <script>
-import {mapState} from 'vuex'
 export default {
-  porps:['scope.row'],
+  porps: ['scope.row'],
   name: 'Band',
   data() {
     return {
       centerDialogVisible: false,
-      huan:''
+      
     }
   },
   methods: {
-    fang(){
+    fang() {
       // window.console.log(this.scope.row)
-      this.$store.dispatch('upBill',this.huan)
-      if(this.isShow){
-        this.$attrs.change.handle=!this.$attrs.change.handle
-      }
       
-      
+      this.centerDialogVisible=false
       // this.$attrs.change.degree++
     }
-  },
-  computed:{
-    ...mapState(['isShow'])
   }
-  
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
@@ -49,7 +41,6 @@ export default {
   display flex
   flex-direction column
   align-items center
-  
   img
     width 100px
     height 100px

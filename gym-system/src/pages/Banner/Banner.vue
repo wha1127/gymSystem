@@ -6,7 +6,7 @@
         <el-card class="box-card">
           <el-row :gutter="20">
             <el-col :offset="2" :span="1">
-              <el-button size="mini" @click="$router.push('/order')">返回</el-button>
+              <el-button size="mini" @click="$router.replace('/order')">返回</el-button>
             </el-col>
             <el-col :span="10" :offset="1">
               <el-breadcrumb separator="/" id="boxBodyBooton">

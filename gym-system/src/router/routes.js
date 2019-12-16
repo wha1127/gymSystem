@@ -96,7 +96,8 @@ export default [
   },
   {
     path: '/editingCourse',
-    component: EditingCourse
+    component: EditingCourse,
+    meta:'编辑课程'
   },
   {
     path: '/timeTable',
@@ -139,7 +140,8 @@ export default [
   },
   {
     path: '/Bianji',
-    component: Bianji
+    component: Bianji,
+    meta:'编辑会员卡'
   },
   {
     path:'/person',

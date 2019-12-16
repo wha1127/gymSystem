@@ -1,5 +1,7 @@
 <template>
   <div class="edit" >
+    <Header/>
+    <Split :name="$router.history.current.meta"/>
     <div class="edit-title" >
       <span class="title" >编辑会员卡</span>
     </div>

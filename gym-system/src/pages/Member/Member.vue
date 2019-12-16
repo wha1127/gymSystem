@@ -1,7 +1,6 @@
 <template>
   <div class="member" >
     <Header/>
-    <Split :name="$router.history.current.meta"/>
     <div class="member-title">
       <span class="title">
         会员卡管理
@@ -14,7 +13,7 @@
         <button @click="$router.push('/Bianji')" class="alter"></button>
         <button class="start" ></button>
       </li>
-      <li class="ci">kojiu
+      <li class="ci">
         <!-- <p>次卡</p>
         <p>20次入场,送体验课一次</p> -->
         <button class="alter"></button>

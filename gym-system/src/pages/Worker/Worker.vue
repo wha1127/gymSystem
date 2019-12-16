@@ -1,6 +1,7 @@
 <template>
   <div>
     <!-- 头部样式开始 -->
+    <Header style="width:100%"/>
     <el-card class="box-card">
       <el-row :gutter="20">
         <el-col :offset="2"

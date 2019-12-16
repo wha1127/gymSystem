@@ -1,5 +1,7 @@
 <template>
   <div class="containerClass">
+    <Header style="width:100%"/>
+    <Split :name="$router.history.current.meta" style="width:100%"/>
     <div class="container-one">
       <el-form class="content"
                :model="ruleForm"

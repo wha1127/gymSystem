@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div>活动编辑</div>
+    <Header style="width:100%"/>
+    <Split :name="$router.history.current.meta" style="width:100%"/>
   </div>
 </template>
 <script>

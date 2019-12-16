@@ -11,22 +11,23 @@
     <div class="main">
       <form action='###'  >
         <span class="con" >用户昵称: </span>
-        <input type="text" placeholder="请输入用户昵称">
-        <span class="con" >用户昵称: </span>
-        <input type="text" placeholder="请输入用户昵称" >
+        <input type="text"  placeholder="请输入用户昵称">
+        <span class="con" >手机号码: </span>
+        <input type="text"  placeholder="请输入用户手机号码" >
         <span class="con" >用户姓名: </span>
-        <input type="text" placeholder="请输入用户姓名" >
+        <input type="text"  placeholder="请输入用户姓名" >
         <br>
         <span class="con" >用户状态: </span>
         <select name="users">
           <option value="volvo">全部用户</option>
-          <option value="saab">Saab</option>
-          <option value="fiat">Fiat</option>
-          <option value="audi">Audi</option>
+          <option value="saab">离场用户</option>
+          <option value="fiat">入场用户</option>
         </select>
         <span class="signIn" >今日签到:60人</span>
         <span class="signUp">签退人数:20人</span>
-        <el-button type="primary" plain  size="mini" class="search" >搜所</el-button>
+        <el-button type="primary" plain  size="mini" class="search" >
+          <Ts/>
+        </el-button>
       </form>
     </div>
     <Loan/>
@@ -41,19 +42,25 @@
 import Loan from '../../components/Loan/Loan'
 import Broad from '../../components/Broad/Broad'
 import Users from '../../components/Users/Users'
+import {mapState} from 'vuex'
+import Ts from './Ts'
 export default {
   name:'Admission',
   components:{
     Loan,
     Broad,
-    Users
+    Users,
+    Ts
   },
-  mounted() {
-    console.log(this.$router.history.current.meta)
-  },
+  computed:{
+    ...mapState({
+      user:state => state.member.member,
+      num:state => state.member.member.num
+    })
+  }
 }
 </script>
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
 .Outermost
   width 1400px
   background-color #f0f2f5
@@ -103,5 +110,6 @@ export default {
     .search
       position absolute
       right 46px
-      bottom 24px
+      bottom 15px
+      
 </style>

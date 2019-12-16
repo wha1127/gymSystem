@@ -133,7 +133,7 @@ export default {
     //跳转到添加教练信息
     goDetail() {
       this.isShowDetail()
-      this.$router.push('/coach/detail')
+      this.$router.replace('/coach/detail')
     },
     isShowDetail() {
       this.isShow = !this.isShow

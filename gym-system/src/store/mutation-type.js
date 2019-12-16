@@ -18,3 +18,5 @@ export const UPDATE_CLASS = 'update_class'
 export const ADD_CLASS = 'add_class'
 // 删除课程信息
 export const DELETE_CLASS = 'delete_class'
+export const DOWN_BILL='DOWN_BILL'
+export const UP_BILL='UP_BILL'

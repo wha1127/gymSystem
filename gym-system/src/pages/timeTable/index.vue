@@ -9,7 +9,7 @@
           <el-button type="primary"
                      plain
                      @click="goToItem">切换到列表</el-button>
-          <el-button type="primary">创建课程</el-button>
+          <el-button type="primary" @click="$router.push('/editingCourse')">创建课程</el-button>
 
         </div>
       </header>
