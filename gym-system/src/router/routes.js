@@ -88,11 +88,13 @@ export default [
   },
   {
     path: '/redactClass',
-    component: RedactClass
+    component: RedactClass,
+    meta:'编辑班级'
   },
   {
     path: '/classList',
     component: ClassList,
+    meta:'班级列表'
   },
   {
     path: '/editingCourse',

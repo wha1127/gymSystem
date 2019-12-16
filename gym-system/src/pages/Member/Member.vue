@@ -1,6 +1,7 @@
 <template>
   <div class="member" >
     <Header/>
+    <Split :name="$router.history.current.meta"/>
     <div class="member-title">
       <span class="title">
         会员卡管理
