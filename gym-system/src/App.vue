@@ -14,7 +14,7 @@ export default {
 
   },
   mounted () {
-    console.log(this)
+    //console.log(this)
     this.$store.dispatch('getClass')
   },
 }

@@ -281,7 +281,7 @@ export default {
   },
   mounted () {
 
-    console.log(this.newClass)
+    console.log(this)
   },
   computed: {
     ...mapState({

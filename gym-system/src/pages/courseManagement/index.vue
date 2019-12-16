@@ -99,11 +99,13 @@ export default {
     })
   },
   async mounted () {
+
     await this.$store.dispatch('getClass')
 
     this.$nextTick(() => {
       this.newClasses = this.classes
     })
+
   },
   data () {
     return {
@@ -114,35 +116,56 @@ export default {
   methods: {
     //搜索
     searchClass () {
-      const { classes } = this
+      const { newClasses } = this
       //console.log(this.input)
-      console.log(classes)
-      const result = classes.filter(item => item.title.includes(this.input))
+      console.log(newClasses)
+      const result = newClasses.filter(item => { return item.title.includes(this.input) })
+      console.log(result)
       this.newClasses = result
     },
     //删除行数
-    handleDelete (index) {
+    async handleDelete (index) {
       const title = this.newClasses[index].title
       console.log(this.newClasses)
-      this.$store.dispatch('deleteClass', title)
-      this.newClasses.splice(index, 1)
+      await this.$store.dispatch('deleteClass', title)
+      this.newClasses = this.classes
     },
+    //跳转到课程表
     goTimetable () {
       //console.log(this.$router.history.current.path)
       this.$router.push("/timeTable")
     },
+    //跳转到班级列表
     goToClass () {
 
       this.$router.push("/classList")
     },
+    // 跳转到更新页面
     editingClass () {
-      this.$router.push("/editingCourse")
+      console.log(this.newClasses)
+      const { title,
+        price,
+        salePrice,
+        saleMessage,
+        sign,
+        introduce,
+        influence,
+        attention } = this.newClasses
+      //this.$router.push("/editingCourse")
+      this.$store.dispatch("updateClass", {        title,
+        price,
+        salePrice,
+        saleMessage,
+        sign,
+        introduce,
+        influence,
+        attention      })
     },
-    // 增加数据
 
     addLine () {
       this.$router.push("/editingCourse")
     },
+    // 搜索功能 当值为空重新请求页面 
     async classChangs () {
       if (this.input === '') {
         await this.$store.dispatch('getClass')
@@ -182,7 +205,7 @@ export default {
           height 20px
           border-left 3px solid #00c
       .search
-        width 90%
+        width 80%
         height 50px
         background-color #fff
         margin 0 0 20px 10%

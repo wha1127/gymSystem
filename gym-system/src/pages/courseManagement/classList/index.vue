@@ -6,7 +6,8 @@
         <header class="title">
           <span class="title-left">瑜伽课班级列表</span>
           <div class="title-right">
-            <el-button type="primary">创建课程</el-button>
+            <el-button type="primary"
+                       @click="compileClass">创建课程</el-button>
 
           </div>
         </header>
@@ -119,6 +120,9 @@ export default {
   },
   methods: {
     goToRC () {
+      this.$router.push('/redactClass')
+    },
+    compileClass () {
       this.$router.push('/redactClass')
     }
   }

@@ -2,31 +2,35 @@
   <div class="header">
     <div class="header-left">
       <img src="./images/logo.png"
-         alt="logo"
-         class="logo">
-    <h2 class="title">商家管理后台</h2>
+           alt="logo"
+           class="logo">
+      <h2 class="title">商家管理后台</h2>
     </div>
     <div class="header-right">
-        <img src="./images/message.png" alt="消息提示" class="message">
-        <img src="./images/avatar.png" alt="头像" class="avatar">
-        <span>用户{{user.name}}</span>
+      <img src="./images/message.png"
+           alt="消息提示"
+           class="message">
+      <img src="./images/avatar.png"
+           alt="头像"
+           class="avatar">
+      <span>用户{{user.name}}</span>
     </div>
   </div>
 
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import { mapState } from 'vuex'
 export default {
-  name:'Header',
+  name: 'Header',
   computed: {
     ...mapState({
       user: state => state.user.user
     }),
   },
-  mounted() {
+  mounted () {
     this.$store.dispatch('autoLogin')
-    console.log(this.$store.state)
+    //console.log(this.$store.state)
   },
 }
 </script>
