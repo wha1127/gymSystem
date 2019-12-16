@@ -87,11 +87,11 @@ export const reqAddCoach = ({
   }
 })
 
-export const reqDeleteCoach = (name) => ajax({
+export const reqDeleteCoach = (_id) => ajax({
   method: 'POST',
   url: BASE + '/coaches/delete',
   data: {
-    name
+    _id
   }
 })
 

@@ -325,11 +325,10 @@ export default {
     },
     search () {
       const { tableData, searchContent } = this
-      // this.tableData = tableData.filter(data => searchContent === data.id)
+      this.tableData = tableData.filter(data => searchContent === data.id)
       console.log(searchContent)
-      this.tableData = tableData.filter(data => searchContent === data.phone)
+      // this.tableData = tableData.filter(data => searchContent === data.phone)
       this.serachContent = ""
-
     }
   },
 

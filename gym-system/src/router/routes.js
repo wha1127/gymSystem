@@ -60,23 +60,20 @@ export default [
   {
     path: "/coach",
     component: Coach,
-    children: [
-      {
-        path: "/coach/detail",
-        component: CoachDetail
-      }
-    ]
+  },
+  {
+    path: "/coach/detail",
+    component: CoachDetail
   },
   {
     path: "/banner",
     component: Banner,
     meta:'banner管理',
-    children: [
-      {
-        path: "/banner/add",
-        component: AddBanner
-      }
-    ]
+
+  },
+  {
+    path: "/banner/add",
+    component: AddBanner
   },
   {
     path: '/activity',

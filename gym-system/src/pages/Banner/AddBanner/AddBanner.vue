@@ -95,9 +95,11 @@ export default {
     }
   },
   methods: {
+    //提交保存添加banner图
     onSubmit() {
       console.log('submit!')
     },
+    //返回Banner界面
     gabackaddBanner() {
       this.$router.back()
       this.isShowDetail()
@@ -112,7 +114,7 @@ export default {
   }
 }
 </script>
-<style lang="stylus" rel="stylesheet/stylus" scoped>
+<style lang="stylus" rel="stylesheet/stylus">
 .addBanner-detail
   width 100%
   height 100%

@@ -1,13 +1,12 @@
 <template>
   <div class="container">
-    <Header/>
-    <Split :name="$router.history.current.meta"/>
     <div class="content">
       <header class="title">
         <span class="title-left">课程表</span>
         <div class="title-right">
           <el-button type="primary"
-                     plain>切换到列表</el-button>
+                     plain
+                     @click="goToItem">切换到列表</el-button>
           <el-button type="primary">创建课程</el-button>
 
         </div>
@@ -136,6 +135,11 @@ export default {
       }
       ]
     }
+  },
+  methods: {
+    goToItem () {
+      this.$router.push('/courseManagement')
+    }
   }
 }
 </script>
@@ -144,9 +148,6 @@ export default {
   width 100%
   height 100%
   // background-color rgba(0, 0, 255, .08)
-  display flex
-  justify-content center
-  flex-wrap wrap
   .content
     width 100%
     height 90%

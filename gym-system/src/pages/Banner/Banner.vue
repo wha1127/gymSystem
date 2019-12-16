@@ -1,8 +1,21 @@
 <template>
   <div>
     <div class="banner-outer" v-if="isShow">
-      <Header/>
-      <Split :name="$router.history.current.meta"/>
+      <div class="main-header">
+        <el-card class="box-card">
+          <el-row :gutter="20">
+            <el-col :offset="2" :span="1">
+              <el-button size="mini" @click="$router.push('/order')">返回</el-button>
+            </el-col>
+            <el-col :span="10" :offset="1">
+              <el-breadcrumb separator="/" id="boxBodyBooton">
+                <el-breadcrumb-item :to="{path:'/'}">功能面板</el-breadcrumb-item>
+                <el-breadcrumb-item>banner图列表</el-breadcrumb-item>
+              </el-breadcrumb>
+            </el-col>
+          </el-row>
+        </el-card>
+      </div>
       <div class="bannerContainer">
         <div class="banner-header">
           <p class="header-left">banner图列表</p>
@@ -79,6 +92,7 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`)
     },
+    //跳转到添加banner界面
     goDetail() {
       this.isShowDetail()
       this.$router.push('/banner/detail')
@@ -86,9 +100,11 @@ export default {
     isShowDetail() {
       this.isShow = !this.isShow
     },
+    //点击链接跳转
     goNewPage(url) {
       window.open(url)
     },
+    //跳转到添加banner图界面
     addBanner() {
       this.$router.push('/banner/add')
       this.isShowDetail()
@@ -100,9 +116,6 @@ export default {
 .banner-outer
   width 100%
   height 100%
-  display flex
-  justify-content center
-  flex-wrap wrap
   .main-header
     width 100%
     .el-breadcrumb

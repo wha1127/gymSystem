@@ -128,6 +128,7 @@ export default {
     })
   },
   mounted() {
+    //界面渲染完成之后立刻获取预约信息
     this.getOrders()
   }
 }

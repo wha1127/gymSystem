@@ -27,10 +27,10 @@
           <el-table-column label="操作" style="width:25%" align="center">
             <template slot-scope="scope">
               <el-button size="mini"
-                         @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                         @click="$router.push('/gym/gymedit')">编辑</el-button>
               <el-button size="mini"
                          type="danger"
-                         @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                         @click="deleteGym(scope.$index)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -45,6 +45,9 @@ export default {
   methods: {
     handleEdit(row, column){
       console.log(row, column)
+    },
+    deleteGym(index){
+      this.tableData.splice(index,1)
     }
   },
   data () {

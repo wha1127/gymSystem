@@ -6,7 +6,7 @@
         <el-card class="box-card">
           <el-row :gutter="20">
             <el-col :offset="2" :span="1">
-              <el-button size="mini" @click="$router.push('/order')">返回</el-button>
+              <el-button size="mini" @click="$router.back()">返回</el-button>
             </el-col>
             <el-col :span="10" :offset="1">
               <el-breadcrumb separator="/" id="boxBodyBooton">
@@ -115,6 +115,7 @@ export default {
     }
   },
   watch: {
+    //监视name状态数据,一旦input框值清空,重新获取教练信息
     name() {
       if (this.name === '') {
         return this.getCoaches()
@@ -129,6 +130,7 @@ export default {
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`)
     },
+    //跳转到添加教练信息
     goDetail() {
       this.isShowDetail()
       this.$router.push('/coach/detail')
@@ -136,10 +138,12 @@ export default {
     isShowDetail() {
       this.isShow = !this.isShow
     },
-    deleteCoach(index) {
+    //点击删除教练信息
+    deleteCoach(index,e) {
       this.coaches.splice(index, 1)
-      this.$store.commit('delete_coach', this.coaches)
+      this.$store.dispatch('delCoach', e._id)
     },
+    //点击搜索教练
     searchCoach() {
       const searchName = this.name
       console.log(searchName)

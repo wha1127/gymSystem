@@ -7,7 +7,7 @@ const coachesSchema = new mongoose.Schema({
   rank:String, // 等级
   memberCount: String, // 会员数量
   sort:String, // 所有有权限操作的菜单path的数组
-  sex:String, // 性别
+  gender:String, // 性别
   star:String, // 星级
   id:String
 });

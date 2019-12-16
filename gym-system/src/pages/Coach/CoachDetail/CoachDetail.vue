@@ -137,9 +137,11 @@ export default {
   },
   methods: {
     ...mapActions(['addCoach']),
+    //返回coach界面
     gabackCoach() {
       this.$router.back()
     },
+    //图片上传功能
     handleRemove(file, fileList) {
       console.log(file, fileList)
     },
@@ -152,6 +154,7 @@ export default {
       // console.log(response, file, fileList)
       this.ruleForm.avatar = file.url
     },
+    //点击提交添加教练信息
     onSubmit(ruleForm) {
       console.log(this.$refs.ruleForm)
       this.$refs.ruleForm.validate(valid => {

@@ -179,8 +179,9 @@ router.post('/coaches/update',async (req,res)=>{
 
 
 router.post('/coaches/delete',(req,res)=>{
-  const {name} = req.body;
-  users.deleteOne({name})
+  const {_id} = req.body;
+  console.log(req.body)
+  Coaches.findByIdAndDelete({_id})
     .then((doc) => {
       res.json({status:0,data:{}})
     })
@@ -233,6 +234,7 @@ router.post('/course/add',async (req,res) => {
 
 router.post('/course/delete',(req,res) => {
   const {title} = req.body
+  
   Courses.deleteOne({title})
   .then(() => {
     res.json({status:0,data:title})
@@ -278,6 +280,7 @@ router.post('/goods/add',async (req,res) => {
 
 router.post('/goods/delete',(req,res) => {
   const {id} = req.body
+  
   Goods.deleteOne({_id:id})
     .then(oldGood => {
       res.json({status:0,message:"删除成功"})

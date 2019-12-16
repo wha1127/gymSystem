@@ -49,11 +49,13 @@ const actions = {
   },
 
   //删除教练信息
-  async delCoach ({commit},name) {
-    const result = await reqDeleteCoach(name)
+  async delCoach ({commit},_id) {
+    console.log(111)
+    const result = await reqDeleteCoach(_id)
     console.log(result)
     if(result.data.status === 0){
       console.log("删除成功")
+      commit(DELETE_COACH, _id)
     }
   }
 }

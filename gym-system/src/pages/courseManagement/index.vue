@@ -1,7 +1,5 @@
 <template>
   <div class="container-list">
-    <Header/>
-    <Split :name="$router.history.current.meta"/>
     <div class="container-one">
       <div class="content">
         <!-- 课程头部 -->
@@ -11,7 +9,8 @@
             <el-button type="primary"
                        plain
                        @click="goTimetable">切换到课程表</el-button>
-            <el-button type="primary">创建课程</el-button>
+            <el-button type="primary"
+                       @click="addLine">创建课程</el-button>
 
           </div>
         </header>
@@ -20,32 +19,31 @@
           <span>课程名称: </span>
           <el-input v-model="input"
                     placeholder="请输入内容"
-                    class="input-search"></el-input>
-          <el-button plain>搜索</el-button>
+                    class="input-search"
+                    @input="classChangs"></el-input>
+          <el-button plain
+                     @click="searchClass">搜索</el-button>
         </div>
         <!-- 表单部分 -->
         <div class="con">
-          <el-table :data="tableData"
+          <el-table :data="newClasses"
                     style="width: 90%">
-            <el-table-column prop="cover"
+            <el-table-column prop="avatar"
                              label="课程封面">
               <img src="./image/jianshen1.png"
                    alt>
             </el-table-column>
-            <el-table-column prop="className"
+            <el-table-column prop="title"
                              label="课程名称">
-            </el-table-column>
-            <el-table-column prop="people"
-                             label="报名人数">
-            </el-table-column>
+            </el-table-column>>
             <el-table-column prop="price"
                              label="价格">
             </el-table-column>
-            <el-table-column prop="discounts"
+            <el-table-column prop="salePrice"
                              label="优惠"
                              width="160">
             </el-table-column>
-            <el-table-column prop="label"
+            <el-table-column prop="sign"
                              label="标签"
                              width="160">
               <template>
@@ -61,13 +59,10 @@
               <el-button type="text"
                          size="small">上架</el-button>
             </el-table-column>
-            <el-table-column prop="class"
-                             label="班级">
-            </el-table-column>
             <el-table-column prop="operate"
                              label="操作"
                              width="180">
-              <template>
+              <template slot-scope="scope">
                 <el-button type="text"
                            size="small"
                            @click="editingClass">
@@ -81,7 +76,8 @@
                 </el-button>
                 <span class="shu">|</span>
                 <el-button type="text"
-                           size="small">删除</el-button>
+                           size="small"
+                           @click="handleDelete(scope.$index)">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -94,38 +90,46 @@
 
 </template>
 <script>
-import {reqAddCourse} from '../../api'
+import { mapState } from 'vuex'
 export default {
+  name: "courseManagement",
+  computed: {
+    ...mapState({
+      classes: state => state.classItem.classes
+    })
+  },
+  async mounted () {
+    await this.$store.dispatch('getClass')
+
+    this.$nextTick(() => {
+      this.newClasses = this.classes
+    })
+  },
   data () {
     return {
       input: "",
-      tableData: [{
-        date: '',
-        className: '',
-        people: '24',
-        price: '5000元',
-        discounts: '4800元 省4天',
-        label: '',
-        state: '',
-        class: '2',
-        operate: ''
-      }, {
-        date: '',
-        name: '王小黑',
-        people: '14',
-        price: '5000元',
-        discounts: '4800元 省4天',
-        label: '',
-        state: '',
-        class: '2',
-        operate: ''
-      }]
+      newClasses: []
     }
   },
   methods: {
+    //搜索
+    searchClass () {
+      const { classes } = this
+      //console.log(this.input)
+      console.log(classes)
+      const result = classes.filter(item => item.title.includes(this.input))
+      this.newClasses = result
+    },
+    //删除行数
+    handleDelete (index) {
+      const title = this.newClasses[index].title
+      console.log(this.newClasses)
+      this.$store.dispatch('deleteClass', title)
+      this.newClasses.splice(index, 1)
+    },
     goTimetable () {
       //console.log(this.$router.history.current.path)
-      this.$router.push("/classList")
+      this.$router.push("/timeTable")
     },
     goToClass () {
 
@@ -134,21 +138,29 @@ export default {
     editingClass () {
       this.$router.push("/editingCourse")
     },
-    async addCourse(){
-      const result = await reqAddCourse()
-      console.log(result)
+    // 增加数据
+
+    addLine () {
+      this.$router.push("/editingCourse")
+    },
+    async classChangs () {
+      if (this.input === '') {
+        await this.$store.dispatch('getClass')
+        this.$nextTick(() => {
+          this.newClasses = this.classes
+        })
+      }
     }
   }
+
 }
+
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .container-list
   width 100%
   height 100%
   background-color rgba(0, 0, 255, .08)
-  display flex
-  justify-content center
-  flex-wrap wrap
   .container-one
     width 100%
     height 100%
