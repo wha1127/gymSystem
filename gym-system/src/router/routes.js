@@ -55,7 +55,8 @@ export default [
   },
   {
     path:'/gym/gymedit',
-    component:GymEdit
+    component:GymEdit,
+    meta:'健身房详情'
   },
   {
     path: "/coach",

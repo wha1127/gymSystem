@@ -1,7 +1,7 @@
 <template>
   <div class="GymEditContainer">
     <Header />
-    <Split />
+    <Split :name="$router.history.current.meta"/>
     <div class="GymEditContent">
       <div class="GymEditContentTop">
         <p>上传场馆图</p>
